@@ -96,7 +96,7 @@ LoadScriptFile(ScriptFile, [Execute:|#[#]|[Label]=""/Display menu]);
 MoveTo(Location, [Source=Current Selection]);
 !
 !TEXT=Msg
-Msg([Text=""]);
+Msg([Text=""], [Buttons:0/OK|1/OKCancel=0/OK);
 !
 !TEXT=Open
 Open([Item="explorer.exe <xypath>"]);
