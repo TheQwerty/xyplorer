@@ -15,6 +15,9 @@
 !TEXT=<curfolder>
 <curfolder>
 !
+!TEXT=<curitem>
+<curitem>
+!
 !TEXT=<curpath>
 <curpath>
 !
