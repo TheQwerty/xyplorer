@@ -18,6 +18,9 @@
 !TEXT=<curitem>
 <curitem>
 !
+!TEXT=<curname>
+<curname>
+!
 !TEXT=<curpath>
 <curpath>
 !
@@ -25,6 +28,7 @@
 <curpath_s>
 !
 !TEXT=<curtitle>
+//DEPRECATED: Replaced by <curname>
 <curtitle>
 !
 !TEXT=<curver>
