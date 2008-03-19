@@ -74,6 +74,7 @@ CharEsc =
 
 ;FUNCTION COMMANDS
 [Keywords 1]
+AddStr
 BR
 BackupTo
 Box
@@ -84,11 +85,13 @@ Filter
 Focus
 Goto
 Highlight
+Incr
 Input
 InputFile
 InputFolder
 Load
 LoadScriptFile
+MSecs
 MoveTo
 Msg
 New
@@ -96,6 +99,8 @@ Open
 OpenWith
 Push
 Rename
+Replace
+RegExReplace
 Sel
 SelFilter
 SelPos
@@ -105,10 +110,15 @@ Set
 Setting
 SettingP
 SortBy
+Status
 Step
+StrLen
+StrPos
 Sub
+SubStr
 SwapNames
 Text
+Touch
 Try
 UnStep
 Unset
@@ -1633,6 +1643,7 @@ Write
 <curtitle>
 <curver>
 <dyyyymmddhhnnss>
+<focitem>
 <myyyymmddhhnnss>
 <xydata>
 <xyexe>
