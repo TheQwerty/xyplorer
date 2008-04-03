@@ -1,0 +1,11 @@
+//	.\Scripts\RegExp-Rename.xys
+//	This script makes it so that the other three menus sort of emulate submenus.
+
+"&Filename Only... : Filename"
+	Load("Scripts\RegExp-Filename.xys","","f");
+
+"&Extension Only... : Extension"
+	Load("Scripts\RegExp-Ext.xys","","f");
+
+"&Both Filename and Extension... : Both"
+	Load("Scripts\RegExp-Both.xys","","f");

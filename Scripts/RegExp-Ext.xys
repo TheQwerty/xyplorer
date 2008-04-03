@@ -1,0 +1,47 @@
+//	.\Scripts\RegExp-Ext.xys
+//	This script contains some complex regular expression patterns
+//	to perform operations on just the extensions of selected items.
+
+
+"Rename Extension Only"
+
+//------------------------------------------------------------------
+"-"
+
+//TEXT REPLACEMENT
+
+"&1. Replace with 'text' : Replace"
+	Input("%TEXT%", "Text to replace extension with.");
+	Rename("re", "^(.+?\.)(?:[^\.]*)$>$1%TEXT%", "p");
+
+//------------------------------------------------------------------
+"-"
+
+//TRIMMING
+
+"&2. Remove 'n' characters from left : TrimLeft"
+	Input("%N%", "Number of characters to remove from left of extension.");
+	Rename("re", "^(.+?\.)(?:(?:[^\.]{%N%}([^\.]*))|(?:[^\.]*))$>$1$2", "p");
+"&3. Remove 'n' characters from right : TrimRight"
+	Input("%N%", "Number of characters to remove from right of extension.");
+	Rename("re", "^(.+?\.)(?:(?:([^\.]*?)[^\.]{%N%})|(?:[^\.]*))$>$1$2", "p");
+"&4. Remove 'n' characters starting after character 'x' : TrimMid"
+	Input("%X%", "Position at which to start removing characters from extension. (Leftmost = 0)");
+	Input("%N%", "Number of characters to remove from extension starting at given position.");
+	Rename("re", "^(.+?\.)(?:(?:([^\.]{%X%})[^\.]{%N%}([^\.]*))|(?:([^\.]{%X%})[^\.]*)|(?:([^\.]*)))$>$1$2$3$4$5", "p");
+
+//------------------------------------------------------------------
+"-"
+
+//INSERTION
+
+"&5. Insert 'text' on left : Prepend"
+	Input("%TEXT%", "Text to insert before extension.");
+	Rename("re", "^(.+?\.)([^\.]*)$>$1%TEXT%$2", "p");
+"&6. Insert 'text' on right : Append"
+	Input("%TEXT%", "Text to insert after extension.");
+	Rename("re", "^(.+?\.)([^\.]*)$>$1$2%TEXT%", "p");
+"&7. Insert 'text' after character 'x' : Insert"
+	Input("%X%", "Position at which to insert text into extension. (Leftmost = 0)");
+	Input("%TEXT%", "Text to insert into extension.");
+	Rename("re", "^(.+?\.)(?:([^\.]{%X%})([^\.]*)|([^\.]*))$>$1$2$4%TEXT%$3", "p");

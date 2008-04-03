@@ -56,7 +56,7 @@
 #[ID];
 !
 !TEXT=AddStr
-AddStr(VariableName, [String1=""/Blank], [String2=""/Blank], [String3=""/Blank]);
+AddStr(VariableName, [String1=""/Blank], ..., [String10=""/Blank]);
 !
 !TEXT=BackupTo
 BackupTo([Location=Current Path], [Source=Current Selection]);
