@@ -118,7 +118,7 @@ MoveTo(Location, [Source=Current Selection]);
 Msg([Text=""], [Buttons:0/OK|1/OKCancel=0/OK);
 !
 !TEXT=Open
-Open([Item="explorer.exe <xypath>"]);
+Open([Item="explorer.exe <xypath>"], [Association:|w/Windows=""/PFA]);
 !
 !TEXT=OpenWith
 OpenWith([Application="explorer.exe"], [Multiple?:s|m]);

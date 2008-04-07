@@ -2,10 +2,10 @@
 //	This script makes it so that the other three menus sort of emulate submenus.
 
 "&Filename Only... : Filename"
-	Load("Scripts\RegExp-Filename.xys","","f");
+	Load("RegExp-Filename.xys","","f");
 
 "&Extension Only... : Extension"
-	Load("Scripts\RegExp-Ext.xys","","f");
+	Load("RegExp-Ext.xys","","f");
 
 "&Both Filename and Extension... : Both"
-	Load("Scripts\RegExp-Both.xys","","f");
+	Load("RegExp-Both.xys","","f");
