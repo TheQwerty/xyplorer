@@ -121,7 +121,7 @@ Msg([Text=""], [Buttons:0/OK|1/OKCancel=0/OK);
 Open([Item="explorer.exe <xypath>"], [Association:|w/Windows=""/PFA]);
 !
 !TEXT=OpenWith
-OpenWith([Application="explorer.exe"], [Multiple?:s|m]);
+OpenWith([Application="explorer.exe"], [Multiple?:s|m], [Item]);
 !
 !TEXT=Push
 //DEPRECATED: Replaced by Try();
