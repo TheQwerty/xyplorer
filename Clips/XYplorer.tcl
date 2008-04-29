@@ -43,6 +43,24 @@
 !TEXT=<myyyymmddhhnnss>
 <myyyymmddhhnnss>
 !
+!TEXT=<srcbase>
+<srcbase>
+!
+!TEXT=<srcext>
+<srcext>
+!
+!TEXT=<srcitem>
+<srcitem>
+!
+!TEXT=<srcmyyyymmddhhnnss>
+<srcmyyyymmddhhnnss>
+!
+!TEXT=<srcname>
+<srcname>
+!
+!TEXT=<srcver>
+<srcver>
+!
 !TEXT=<xydata>
 <xydata>
 !
@@ -128,7 +146,7 @@ OpenWith([Application="explorer.exe"], [Multiple?:s|m], [Item]);
 Push();
 !
 !TEXT=Rename
-Rename([Mode:bat|re|sr|kc|ext], [Pattern=""/Show Dialog], [Preview?:|p=""/Single]);
+Rename([Mode:bat|re|sr|kc|ext], [Pattern=""/Show Dialog], [Preview?:|p=""/Single], [Items:""/Selection]);
 !
 !TEXT=Repalce
 Replace(VariableName, String, Query, [Replacement], [MatchCase?:0|1]);
