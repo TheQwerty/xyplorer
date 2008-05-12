@@ -101,6 +101,7 @@ Push
 Rename
 Replace
 RegExReplace
+Run
 Sel
 SelFilter
 SelPos

@@ -154,6 +154,9 @@ Replace(VariableName, String, Query, [Replacement], [MatchCase?:0|1]);
 !TEXT=RegExReplace
 RegExReplace(VariableName, String, Pattern, [Replacement], [MatchCase?:0|1]);
 !
+!TEXT=Run
+Run(Command);
+!
 !TEXT=Sel
 Sel([Type:|[|+|-][#]|"[pattern]"|a|i|f=""/Deselect All], [Count=1]);
 !
