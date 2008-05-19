@@ -35,16 +35,39 @@
 <curver>
 !
 !TEXT=<dyyyymmddhhnnss>
-<dyyyymmddhhnnss>
+//DEPRECATED: Replaced by <date yyyymmddhhnnss>
+<d yyyymmddhhnnss>
+!
+!TEXT=<date yyyymmddhhnnss>
+<date yyyymmddhhnnss>
+!
+!TEXT=<datea yyyymmddhhnnss>
+<datea yyyymmddhhnnss>
+!
+!TEXT=<datec yyyymmddhhnnss>
+<datec yyyymmddhhnnss>
+!
+!TEXT=<datem yyyymmddhhnnss>
+<datem yyyymmddhhnnss>
 !
 !TEXT=<focitem>
 <focitem>
 !
 !TEXT=<myyyymmddhhnnss>
-<myyyymmddhhnnss>
+//DEPRECATED: Replaced by <datem yyyymmddhhnnss>
+<m yyyymmddhhnnss>
 !
 !TEXT=<srcbase>
 <srcbase>
+!
+!TEXT=<srcdatea yyyymmddhhnnss>
+<srcdatea yyyymmddhhnnss>
+!
+!TEXT=<srcdatec yyyymmddhhnnss>
+<srcdatec yyyymmddhhnnss>
+!
+!TEXT=<srcdatem yyyymmddhhnnss>
+<srcdatem yyyymmddhhnnss>
 !
 !TEXT=<srcext>
 <srcext>
@@ -53,7 +76,8 @@
 <srcitem>
 !
 !TEXT=<srcmyyyymmddhhnnss>
-<srcmyyyymmddhhnnss>
+//DEPRECATED: Replaced by <srcdatem yyyymmddhhnnss>
+<srcm yyyymmddhhnnss>
 !
 !TEXT=<srcname>
 <srcname>

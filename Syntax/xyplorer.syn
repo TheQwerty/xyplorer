@@ -1643,13 +1643,20 @@ Write
 <curpath_s>
 <curtitle>
 <curver>
-<dyyyymmddhhnnss>
+<d yyyymmddhhnnss>
+<date yyyymmddhhnnss>
+<datea yyyymmddhhnnss>
+<datec yyyymmddhhnnss>
+<datem yyyymmddhhnnss>
 <focitem>
-<myyyymmddhhnnss>
+<m yyyymmddhhnnss>
 <srcbase>
+<srcdatea yyyymmddhhnnss>
+<srcdatec yyyymmddhhnnss>
+<srcdatem yyyymmddhhnnss>
 <srcext>
 <srcitem>
-<srcmyyyymmddhhnnss>
+<srcm yyyymmddhhnnss>
 <srcname>
 <srcver>
 <xydata>
