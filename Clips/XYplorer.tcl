@@ -104,7 +104,7 @@ AddStr(VariableName, [String1=""/Blank], ..., [String10=""/Blank]);
 BackupTo([Location=Current Path], [Source=Current Selection]);
 !
 !TEXT=Box
-Box([RRGGBB=""/Off]);
+Box([Color=""/Off], [Folder=""/Current]);
 !
 !TEXT=BR
 BR(NewLine);
@@ -129,7 +129,7 @@ Focus([Control:List|Tree|Address Bar|Catalog]);
 GoTo(Location);
 !
 !TEXT=Highlight
-Highlight([Color=""/Off]);
+Highlight([Color=""/Off], [Folder=""/Current]);
 !
 !TEXT=Incr
 Incr(VariableName, [Value="VariableName"], [Increment="1"]);
