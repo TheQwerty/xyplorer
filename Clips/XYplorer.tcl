@@ -125,6 +125,9 @@ Filter([Pattern="|"/Off]);
 !TEXT=Focus
 Focus([Control:List|Tree|Address Bar|Catalog]);
 !
+!TEXT=GetKey
+GetKey(VariableName, Key, Section);
+!
 !TEXT=GoTo
 GoTo(Location);
 !
@@ -200,6 +203,9 @@ Sep(Separator);
 !
 !TEXT=Set
 Set(VariableName, [Value=""]);
+!
+!TEXT=SetKey
+SetKey(Value, Key, Section);
 !
 !TEXT=Setting
 Setting(Setting, [Mode:1|0|r=1], [Permanent?:|p=""/Temporary]);
