@@ -31,8 +31,8 @@
 //DEPRECATED: Replaced by <curname>
 <curtitle>
 !
-!TEXT=<curver>
-<curver>
+!TEXT=<curver|pattern *>
+<curver|pattern *>
 !
 !TEXT=<dyyyymmddhhnnss>
 //DEPRECATED: Replaced by <date yyyymmddhhnnss>
@@ -147,7 +147,7 @@ InputFile(VariableName, [Path=XY's Path], [Extension=""], [Prompt="Open"]);
 InputFolder(VariableName, [Path=My Documents], [Prompt=""]);
 !
 !TEXT=Load
-Load(Resource, [Execute:|#[#]|[Label]=""/Display menu], [ResourceType:f|s=f/File]);
+Load(Resource, [Labels:|#[#]|[Label]|[List]=""/Display menu], [ResourceType:f|s=f/File]);
 !
 !TEXT=LoadScriptFile
 //DEPRECATED: Replaced by Load();
