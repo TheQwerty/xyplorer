@@ -126,7 +126,7 @@ Filter([Pattern="|"/Off]);
 Focus([Control:List|Tree|Address Bar|Catalog]);
 !
 !TEXT=GetKey
-GetKey(VariableName, Key, Section);
+GetKey(VariableName, Key, Section, [File=""/XY Config]);
 !
 !TEXT=GoTo
 GoTo(Location);
@@ -205,7 +205,7 @@ Sep(Separator);
 Set(VariableName, [Value=""]);
 !
 !TEXT=SetKey
-SetKey(Value, Key, Section);
+SetKey(Value, Key, Section, [File=""/XY Config]);
 !
 !TEXT=Setting
 Setting(Setting, [Mode:1|0|r=1], [Permanent?:|p=""/Temporary]);
