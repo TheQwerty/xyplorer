@@ -119,6 +119,9 @@ CopyTextA(Text);
 !TEXT=CopyTo
 CopyTo(Location, [Source=Current Selection]);
 !
+!TEXT=Delete
+Delete([Recycle?:1|0], [Confirm?:|1|0=""/User Setting], [Item=Current Selection]);
+!
 !TEXT=Filter
 Filter([Pattern="|"/Off]);
 !

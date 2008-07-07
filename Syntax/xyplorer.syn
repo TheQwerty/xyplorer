@@ -81,6 +81,7 @@ Box
 CopyText
 CopyTextA
 CopyTo
+Delete
 Filter
 Focus
 GetKey
