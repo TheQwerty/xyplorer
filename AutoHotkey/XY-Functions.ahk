@@ -1,26 +1,3 @@
-;Win+E, Run or Activate XYplorer.
-#E::RunOrActivate("D:\Downloads\Apps\XYplorer\XYplorer.exe","","ThunderRT6FormDC", "left")
-
-
-;As XYplorer can be renamed and thus "XYplorer" may not be in the title, detect the window via class.
-#IfWinActive ahk_class ThunderRT6FormDC
-
-;Ctrl+Shift+Backspace - Map to Ctrl+Shift+Left, Backspace
-^+Backspace::SendInput ^+{Left}{Backspace}
-
-;Ctrl+K - Switch focus between address bar and list
-^K::
-	ControlGetFocus focus, A
-	if (focus == "Edit6") {
-		;Focus List
-		ControlFocus ThunderRT6PictureBoxDC59, A
-	} else {
-		;Focus Address Bar
-		ControlFocus Edit6, A
-	}
-	return
-
-
 ;isListControl(focus)
 ;This function checks to see if the focused control is one that has an MRU/Auto-Complete list.
 isListControl(focus) {
@@ -76,12 +53,6 @@ isListDisplayed(focus, boxTransColor, searchAreaSize) {
 	return %listDisplayed%
 }
 
-
-;Block the mouse wheel on address bar unless list is shown.
-$WheelUp::DoWheelFunction("{WheelUp}")
-$WheelDown::DoWheelFunction("{WheelDown}")
-
-
 ;DoWheelFunction(action)
 ;Block sending the action if the focused control has a list box that is not visible.
 DoWheelFunction(action) {
@@ -107,11 +78,6 @@ DoWheelFunction(action) {
 	return
 }
 
-
-
-;Remap (Shift+)Tab to function as up/down when an auto-complete/MRU list is visible.
-$Tab::DoTabFunctions(1)
-$+Tab::DoTabFunctions(0)
 
 ;DoTabFunctions(mode)
 ;Driver to call TabOnList or spoof the original Tab keypress.
