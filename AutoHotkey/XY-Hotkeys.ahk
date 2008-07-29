@@ -21,6 +21,13 @@
 	}
 	return
 
+;Ctrl+F8 - Cycle Visible Navigation Panels Forward
+;Order is: Tree & Catalog -> Tree Only -> Catalog Only -> Neither -> Repeat
+^F8::CyclePanels()
+
+;Ctrl+Shift+F8 - Cycle Visible Navigation Panels Backwards
+;Order is: Neither -> Catalog Only -> Tree Only -> Tree & Catalog -> Repeat
+^+F8::CyclePanels(0)
 
 ;Block the mouse wheel on address bar unless list is shown.
 $WheelUp::DoWheelFunction("{WheelUp}")
