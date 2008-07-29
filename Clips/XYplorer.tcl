@@ -176,7 +176,7 @@ OpenWith([Application="explorer.exe"], [Multiple?:s|m], [Item]);
 Push();
 !
 !TEXT=Rename
-Rename([Mode:bat|re|sr|kc|ext], [Pattern=""/Show Dialog], [Preview?:|p=""/Single], [Items:""/Selection]);
+Rename([Mode:b|r|s|k|e], [Pattern=""/Show Dialog], [Preview?:|p=""/Single], [Items:""/Selection]);
 !
 !TEXT=Repalce
 Replace(VariableName, String, Query, [Replacement], [MatchCase?:0|1]);
@@ -247,6 +247,9 @@ SwapNames();
 !
 !TEXT=Text
 Text(Text, [Width=500], [Height=300], [Caption=""]);
+!
+!TEXT=TimeStamp
+TimeStamp([Type:c|m|a=cma/All], [Date=""/Now], [Item=""/List Selection]);
 !
 !TEXT=Touch
 Touch();
