@@ -168,6 +168,10 @@ VisiblePanels() {
 ;Order is: Tree & Catalog -> Tree Only -> Catalog Only -> Neither -> Repeat
 ;Mode controls the direction, if mode is False (0) the order is reversed.
 CyclePanels(mode=1) {
+	TOGGLE_NP = 354
+	TOGGLE_TREE = 356
+	TOGGLE_CAT = 357
+
 	cv := VisiblePanels()
 
 	if (cv < 5) {
@@ -178,7 +182,7 @@ CyclePanels(mode=1) {
 			dv := 6 ;Show Catalog Only
 		}
 		;Toggle Nav Panel and update Visible Panels.
-		SendMessage 0x111, 351
+		SendMessage 0x111, %TOGGLE_NP%
 		cv := VisiblePanels()
 
 	} else if (cv == 5) {
@@ -207,17 +211,17 @@ CyclePanels(mode=1) {
 
 	if (cv & 4 != dv & 4) {
 		;Toggle Nav Panel
-		SendMessage 0x111, 351
+		SendMessage 0x111, %TOGGLE_NP%
 	}
 
 	if (cv & 2 != dv & 2) {
 		;Toggle Catalog
-		SendMessage 0x111, 353
+		SendMessage 0x111, %TOGGLE_CAT%
 	}
 
 	if (cv & 1 != dv & 1) {
 		;Toggle Tree
-		SendMessage 0x111, 352
+		SendMessage 0x111, %TOGGLE_TREE%
 	}
 	return
 }
