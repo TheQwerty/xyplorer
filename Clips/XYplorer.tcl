@@ -220,7 +220,7 @@ SettingP(Setting, [Mode:1|0|r=1]);
 SortBy([Column="Name"], [Direction:|a|d|clk=Defined Default]);
 !
 !TEXT=Status
-Status([Text=""], [Color="0046DA"], [Icon:Ready|Progress|Alert|Stop]);
+Status([Text=""], [Color="0046DA"], [Icon:ready|progress|alert|stop]);
 !
 !TEXT=Step...UnStep
 Step();
