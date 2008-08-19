@@ -1,0 +1,39 @@
+//Add .bak to the end of the selected items.
+"&1. Add .bak : AddBak"
+	Rename("re", "$ > .bak");
+
+//Remove .bak from the end of the selected items.
+"&2. Remove .bak : RemoveBak"
+	Rename("re", "\.bak$ > ");
+
+//------------------------------------------------------------------
+"-"
+
+//Add .zip to the end of the selected items.
+"&3. Add .zip : AddZip"
+	Rename("re", "$ > .zip");
+
+//Remove .zip from the end of the selected items.
+"&4. Remove .zip : RemoveZip"
+	Rename("re", "\.zip$ > ");
+
+//------------------------------------------------------------------
+"-"
+
+//Swap Names
+"&5. Swap Names : Swap"
+	SwapNames();
+
+//------------------------------------------------------------------
+"-"
+
+//Clone the current item as a backup and timestamp it.
+"&6. Create Cloned Backup : ClonedBackup"
+	New("<curbase>_<date yyyymmddhhnnss>.<curext>.bak", "file", "<curitem>");
+
+//------------------------------------------------------------------
+"-"
+
+//Open RegExp-Renamer Menu
+"&7. RegExp-Rename : RegExp-Rename"
+	Load("Rename\RegExp-Rename.xys","","f");
