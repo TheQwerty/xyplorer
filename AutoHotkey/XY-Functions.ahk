@@ -3,14 +3,10 @@
 isListControl(focus) {
 	validControls =
 (Join| LTrim Comments
-	Edit1
-	Edit2
-	Edit3
-	Edit4
-	Edit5
+	Edit2	;Rename Dialogs; Paste Here to New Subfolder(s); Selection Filter; Go To; Go To From Here...;
+	Edit4	;Find File->Name;
+	Edit5	;Find File->Location;
 	Edit6	;Address Bar
-	ThunderRT6TextBox2
-	ThunderRT6TextBox3
 )
 	validControls = |%validControls%|
 	focus = |%focus%|

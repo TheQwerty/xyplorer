@@ -28,3 +28,34 @@ $WheelDown::DoWheelFunction("{WheelDown}")
 ;Remap (Shift+)Tab to function as up/down when an auto-complete/MRU list is visible.
 $Tab::DoTabFunctions(1)
 $+Tab::DoTabFunctions(0)
+
+Ctrl & LButton::
+	SendInput ^{Click}
+	Sleep 10
+	ControlGetFocus focus, A
+	if (focus == "Edit6") {
+		SendInput {Click}{Control Down}{Right}{Control Up}{Shift Down}{End}{Shift Up}{Delete}{Enter}
+	}
+
+	return
+
+~LButton::
+	if (LB_presses > 0) {
+		LB_presses += 1
+	} else {
+		LB_presses = 1
+		SetTimer, LBCounter, 400
+	}
+	return
+
+LBCounter:
+	SetTimer, LBCounter, Off
+
+	if (LB_presses == 2) {
+		ControlGetFocus focus, A
+		if (focus == "Edit6") {
+			SendInput {Left}{Right}{Shift Down}{End}{Shift Up}{Delete}{Enter}
+		}
+	}
+	LB_presses = 0
+	return
