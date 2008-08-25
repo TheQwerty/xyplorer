@@ -141,13 +141,13 @@ Highlight([Color=""/Off], [Folder=""/Current]);
 Incr(VariableName, [Value="VariableName"], [Increment="1"]);
 !
 !TEXT=Input
-Input(VariableName, [Prompt=""], [DefaultValue=""], [MultiLine?:|m=""/Single]);
+Input(VariableName, [Prompt=""], [DefaultValue=""], [Style:|m|w=""/Single]);
 !
 !TEXT=InputFile
 InputFile(VariableName, [Path=XY's Path], [Extension=""], [Prompt="Open"]);
 !
 !TEXT=InputFolder
-InputFolder(VariableName, [Path=My Documents], [Prompt=""]);
+InputFolder(VariableName, [Path=XY's Path], [Prompt=""]);
 !
 !TEXT=Load
 Load(Resource, [Labels:|#[#]|[Label]|[List]=""/Display menu], [ResourceType:f|s=f/File]);
@@ -246,7 +246,7 @@ SubStr(VariableName, String, [Start="0"], [Length="[End]"]);
 SwapNames();
 !
 !TEXT=Text
-Text(Text, [Width=500], [Height=300], [Caption=""]);
+Text(Text, [Width=500], [Height=300], [Caption=""], [Wrap?:|w=""/No Wrapping]);
 !
 !TEXT=TimeStamp
 TimeStamp([Type:c|m|a=cma/All], [Date=""/Now], [Item=""/List Selection]);
