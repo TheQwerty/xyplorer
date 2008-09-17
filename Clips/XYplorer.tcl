@@ -34,10 +34,6 @@
 !TEXT=<curver|pattern *>
 <curver|pattern *>
 !
-!TEXT=<dyyyymmddhhnnss>
-//DEPRECATED: Replaced by <date yyyymmddhhnnss>
-<d yyyymmddhhnnss>
-!
 !TEXT=<date yyyymmddhhnnss>
 <date yyyymmddhhnnss>
 !
@@ -52,10 +48,6 @@
 !
 !TEXT=<focitem>
 <focitem>
-!
-!TEXT=<myyyymmddhhnnss>
-//DEPRECATED: Replaced by <datem yyyymmddhhnnss>
-<m yyyymmddhhnnss>
 !
 !TEXT=<srcbase>
 <srcbase>
@@ -75,10 +67,6 @@
 !TEXT=<srcitem>
 <srcitem>
 !
-!TEXT=<srcmyyyymmddhhnnss>
-//DEPRECATED: Replaced by <srcdatem yyyymmddhhnnss>
-<srcm yyyymmddhhnnss>
-!
 !TEXT=<srcname>
 <srcname>
 !
@@ -94,11 +82,21 @@
 !TEXT=<xypath>
 <xypath>
 !
+!TEXT=<xyver>
+<xyver>
+!
 !TEXT=#ID
 #[ID];
 !
+!TEXT==
+Variable = [Value=""], [Resolve?:|r/""=No];
+!
 !TEXT=AddStr
-AddStr(VariableName, [String1=""/Blank], ..., [String10=""/Blank]);
+//DEPRECATED: Replaced by String1 . String2
+AddStr(Variable, [String1=""/Blank], ..., [String10=""/Blank]);
+!
+!TEXT=Assert
+Assert(Condition, [Message], [Continue?:0|1]);
 !
 !TEXT=BackupTo
 BackupTo([Location=Current Path], [Source=Current Selection]);
@@ -110,7 +108,7 @@ Box([Color=""/Off], [Folder=""/Current]);
 BR(NewLine);
 !
 !TEXT=CopyText
-CopyText(Text, [Append?:|a=""/Copy]);
+CopyText(Text, [Append?:|a=""/Copy], [LineBreak="<br>"]);
 !
 !TEXT=CopyTextA
 //DEPRECATED: Replaced by CopyText();
@@ -122,14 +120,20 @@ CopyTo(Location, [Source=Current Selection]);
 !TEXT=Delete
 Delete([Recycle?:1|0], [Confirm?:|1|0=""/User Setting], [Item=Current Selection]);
 !
+!TEXT=Download
+Download(Source, [Target="Download-yyyymmdd.html"], [Options:|o|i=""/Prompt on Collision]);
+!
 !TEXT=Filter
 Filter([Pattern="|"/Off]);
 !
 !TEXT=Focus
 Focus([Control:List|Tree|Address Bar|Catalog]);
 !
+!TEXT=GetInfo
+GetInfo(Variable, Info, [Params]);
+!
 !TEXT=GetKey
-GetKey(VariableName, Key, Section, [File=""/XY Config]);
+GetKey(Variable, Key, Section, [File=""/XY Config]);
 !
 !TEXT=GoTo
 GoTo(Location);
@@ -138,16 +142,19 @@ GoTo(Location);
 Highlight([Color=""/Off], [Folder=""/Current]);
 !
 !TEXT=Incr
-Incr(VariableName, [Value="VariableName"], [Increment="1"]);
+Incr(Variable, [Value=Variable], [Increment="1"]);
 !
 !TEXT=Input
-Input(VariableName, [Prompt=""], [DefaultValue=""], [Style:|m|w=""/Single]);
+Input(Variable, [Prompt=""], [DefaultValue=""], [Style:|m|w=""/Single]);
 !
 !TEXT=InputFile
-InputFile(VariableName, [Path=XY's Path], [Extension=""], [Prompt="Open"]);
+InputFile(Variable, [Path=XY's Path], [Extension=""], [Prompt="Open"]);
 !
 !TEXT=InputFolder
-InputFolder(VariableName, [Path=XY's Path], [Prompt=""]);
+InputFolder(Variable, [Path=XY's Path], [Prompt=""]);
+!
+!TEXT=InternetFlags
+InternetFlags(Setting, Mode:1|0);
 !
 !TEXT=Load
 Load(Resource, [Labels:|#[#]|[Label]|[List]=""/Display menu], [ResourceType:f|s=f/File]);
@@ -156,14 +163,17 @@ Load(Resource, [Labels:|#[#]|[Label]|[List]=""/Display menu], [ResourceType:f|s=
 //DEPRECATED: Replaced by Load();
 LoadScriptFile(ScriptFile, [Execute:|#[#]|[Label]=""/Display menu]);
 !
-!TEXT=MSecs
-MSecs([Mode:|0|1=""/Toggle]);
+!TEXT=LoadSearch
+LoadSearch(Template, [Options:rlex=rl/Load Location & Execute]);
 !
 !TEXT=MoveTo
 MoveTo(Location, [Source=Current Selection]);
 !
 !TEXT=Msg
-Msg([Text=""], [Buttons:0/OK|1/OKCancel=0/OK);
+Msg([Text=""], [Buttons:0/OK|1/OKCancel=0/OK], [LineBreak="<br>"]);
+!
+!TEXT=New
+New([Name], [Type:File|Dir=File], [Source], [Rename?:|r=""/No Rename Mode]);
 !
 !TEXT=Open
 Open([Item="explorer.exe <xypath>"], [Association:|w/Windows=""/PFA]);
@@ -175,20 +185,26 @@ OpenWith([Application="explorer.exe"], [Multiple?:s|m], [Item]);
 //DEPRECATED: Replaced by Try();
 Push();
 !
+!TEXT=ReadURL
+ReadURL(Variable, URL);
+!
+!TEXT=RegExReplace
+RegExReplace(Variable, String, Pattern, [Replacement], [MatchCase?:0|1]);
+!
 !TEXT=Rename
 Rename([Mode:b|r|s|k|e], [Pattern=""/Show Dialog], [Preview?:|p=""/Single], [Items:""/Selection]);
 !
 !TEXT=Repalce
-Replace(VariableName, String, Query, [Replacement], [MatchCase?:0|1]);
-!
-!TEXT=RegExReplace
-RegExReplace(VariableName, String, Pattern, [Replacement], [MatchCase?:0|1]);
+Replace(Variable, String, Query, [Replacement], [MatchCase?:0|1]);
 !
 !TEXT=Run
 Run(Command);
 !
 !TEXT=Sel
 Sel([Type:|[|+|-][#]|"[pattern]"|a|i|f=""/Deselect All], [Count=1]);
+!
+!TEXT=Self
+Self(Variable, [Info:|File|Path|Base|Script=""/Nothing]);
 !
 !TEXT=SelFilter
 SelFilter([Pattern=""/All], [Type:|f|d=""/Both], [Column="Name"]);
@@ -205,7 +221,7 @@ SelTab([Position:|[#]|+|-=""/Default]);
 Sep(Separator);
 !
 !TEXT=Set
-Set(VariableName, [Value=""]);
+Set(Variable, [Value=""], [Resolve?:|r/""=No]);
 !
 !TEXT=SetKey
 SetKey(Value, Key, Section, [File=""/XY Config]);
@@ -231,41 +247,38 @@ UnStep();
 Step();
 !
 !TEXT=StrLen
-StrLen(VariableName, String);
+StrLen(Variable, String);
 !
 !TEXT=StrPos
-StrPos(VariableName, String, Query, [Start="0"], [MatchCase?:0|1]);
+StrPos(Variable, String, Query, [Start="0"], [MatchCase?:0|1]);
 !
 !TEXT=Sub
 Sub(Label);
 !
 !TEXT=SubStr
-SubStr(VariableName, String, [Start="0"], [Length="[End]"]);
+SubStr(Variable, String, [Start="0"], [Length="[End]"]);
 !
 !TEXT=SwapNames
 SwapNames();
 !
 !TEXT=Text
-Text(Text, [Width=500], [Height=300], [Caption=""], [Wrap?:|w=""/No Wrapping]);
+Text(Text, [Width=500], [Height=300], [Caption=""], [Wrap?:|w=""/No Wrapping], [LineBreak="<br>"]);
 !
 !TEXT=TimeStamp
 TimeStamp([Type:c|m|a=cma/All], [Date=""/Now], [Item=""/List Selection]);
-!
-!TEXT=Touch
-Touch();
 !
 !TEXT=Try
 Try();
 !
 !TEXT=UnSet
-UnSet(VariableName);
+UnSet(Variable);
 !
 !TEXT=UnStep
 UnStep();
 !
 !TEXT=UserInput
 //DEPRECATED: Replaced by Input();
-UserInput(VariableName, [Prompt=""], [DefaultValue=""]);
+UserInput(Variable, [Prompt=""], [DefaultValue=""]);
 !
 !TEXT=Write
 //DEPRECATED: Replaced by Try();

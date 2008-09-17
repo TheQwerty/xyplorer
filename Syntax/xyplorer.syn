@@ -22,7 +22,7 @@ KeyWordLength = 0
 BracketChars = {[()]}
 
 ;Characters that are used for operators.
-OperatorChars =
+OperatorChars =<.=!>
 
 ;Character that starts pre-processor statements.
 PreprocStart =
@@ -32,8 +32,8 @@ SyntaxStart =
 SyntaxEnd =
 
 ;A string of characters that start/end multiple line comments.
-CommentStart =
-CommentEnd =
+CommentStart =/*
+CommentEnd =*/
 
 ;An alternate string of characters that start/end multiple line comments.
 CommentStartAlt =
@@ -54,7 +54,7 @@ StringStart = "
 StringEnd = "
 
 ;Alternate character that can be used to delimit strings.
-StringAlt =
+StringAlt ='
 
 ;Character that is used to escape StringEnd in a string.
 StringEsc = "
@@ -75,15 +75,18 @@ CharEsc =
 ;FUNCTION COMMANDS
 [Keywords 1]
 AddStr
-BR
+Assert
 BackupTo
 Box
+BR
 CopyText
 CopyTextA
 CopyTo
 Delete
+Download
 Filter
 Focus
+GetInfo
 GetKey
 Goto
 Highlight
@@ -91,20 +94,23 @@ Incr
 Input
 InputFile
 InputFolder
+InternetFlags
 Load
 LoadScriptFile
-MSecs
+LoadSearch
 MoveTo
 Msg
 New
 Open
 OpenWith
 Push
+ReadURL
+RegExReplace
 Rename
 Replace
-RegExReplace
 Run
 Sel
+Self
 SelFilter
 SelPos
 SelTab
@@ -123,10 +129,9 @@ SubStr
 SwapNames
 Text
 TimeStamp
-Touch
 Try
-UnStep
 Unset
+UnStep
 UserInput
 Write
 
@@ -1647,22 +1652,20 @@ Write
 <curpath_s>
 <curtitle>
 <curver>
-<d yyyymmddhhnnss>
 <date yyyymmddhhnnss>
 <datea yyyymmddhhnnss>
 <datec yyyymmddhhnnss>
 <datem yyyymmddhhnnss>
 <focitem>
-<m yyyymmddhhnnss>
 <srcbase>
 <srcdatea yyyymmddhhnnss>
 <srcdatec yyyymmddhhnnss>
 <srcdatem yyyymmddhhnnss>
 <srcext>
 <srcitem>
-<srcm yyyymmddhhnnss>
 <srcname>
 <srcver>
 <xydata>
 <xyexe>
 <xypath>
+<xyver>
