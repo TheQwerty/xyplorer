@@ -7,6 +7,7 @@ isListControl(focus) {
 	Edit4	;Find File->Name;
 	Edit5	;Find File->Location;
 	Edit6	;Address Bar
+	ThunderRT6ComboBox1	;CKS Catagory Selection
 )
 	validControls = |%validControls%|
 	focus = |%focus%|
