@@ -11,49 +11,49 @@
 "Cycle Forward : forward"
 	//Get Current Nav. Panel Settings
 	#193;
-	GetKey("%n%", "NavHide", "General");
-	GetKey("%t%", "ShowTree", "General");
-	GetKey("%c%", "ShowCatalog", "General");
-	Set("%v%", "%n%%t%%c%");
+	GetKey($n, "NavHide", "General");
+	GetKey($t, "ShowTree", "General");
+	GetKey($c, "ShowCatalog", "General");
+	Set($v, "$n$t$c");
 
 	//Empty NP -> Both
-	RegExReplace("%v%", "%v%", "^000$", "#668;#664;");
+	RegExReplace($v, $v, "^000$", "#668;#664;");
 	//Catalog -> None
-	RegExReplace("%v%", "%v%", "^001$", "#663;");
+	RegExReplace($v, $v, "^001$", "#663;");
 	//Tree -> Catalog
-	RegExReplace("%v%", "%v%", "^010$", "#668;#664;");
+	RegExReplace($v, $v, "^010$", "#668;#664;");
 	//Both -> Tree
-	RegExReplace("%v%", "%v%", "^011$", "#664;");
+	RegExReplace($v, $v, "^011$", "#664;");
 
 	//Various None States -> Both
-	RegExReplace("%v%", "%v%", "^100$", "#668;#664;#663;");
-	RegExReplace("%v%", "%v%", "^101$", "#668;#663;");
-	RegExReplace("%v%", "%v%", "^110$", "#664;#663;");
-	RegExReplace("%v%", "%v%", "^111$", "#663;");
+	RegExReplace($v, $v, "^100$", "#668;#664;#663;");
+	RegExReplace($v, $v, "^101$", "#668;#663;");
+	RegExReplace($v, $v, "^110$", "#664;#663;");
+	RegExReplace($v, $v, "^111$", "#663;");
 
-	Load("%v%",,"s");
+	Load($v,,"s");
 
 "Cycle Backward : backward"
 	//Get Current Nav. Panel Settings
 	#193;
-	GetKey("%n%", "NavHide", "General");
-	GetKey("%t%", "ShowTree", "General");
-	GetKey("%c%", "ShowCatalog", "General");
-	Set("%v%", "%n%%t%%c%");
+	GetKey($n, "NavHide", "General");
+	GetKey($t, "ShowTree", "General");
+	GetKey($c, "ShowCatalog", "General");
+	Set($v, "$n$t$c");
 
 	//Empty NP -> Catalog
-	RegExReplace("%v%", "%v%", "^000$", "#664;");
+	RegExReplace($v, $v, "^000$", "#664;");
 	//Catalog -> Tree
-	RegExReplace("%v%", "%v%", "^001$", "#668;#664;");
+	RegExReplace($v, $v, "^001$", "#668;#664;");
 	//Tree -> Both
-	RegExReplace("%v%", "%v%", "^010$", "#664;");
+	RegExReplace($v, $v, "^010$", "#664;");
 	//Both -> None
-	RegExReplace("%v%", "%v%", "^011$", "#663;");
+	RegExReplace($v, $v, "^011$", "#663;");
 
 	//Various None States -> Catalog
-	RegExReplace("%v%", "%v%", "^100$", "#664;#663;");
-	RegExReplace("%v%", "%v%", "^101$", "#663;");
-	RegExReplace("%v%", "%v%", "^110$", "#668;#664;#663;");
-	RegExReplace("%v%", "%v%", "^111$", "#668;#663;");
+	RegExReplace($v, $v, "^100$", "#664;#663;");
+	RegExReplace($v, $v, "^101$", "#663;");
+	RegExReplace($v, $v, "^110$", "#668;#664;#663;");
+	RegExReplace($v, $v, "^111$", "#668;#663;");
 
-	Load("%v%",,"s");
+	Load($v,,"s");

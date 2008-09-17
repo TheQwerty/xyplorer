@@ -11,16 +11,16 @@
 //TEXT REPLACEMENT
 
 "&1. Replace with 'text' : Rename"
-	Input("%TEXT%", "Text to replace filename (and extension) with.");
-	Rename("re", "^.*$ > %TEXT%", "p");
+	Input($TEXT, "Text to replace filename (and extension) with.");
+	Rename("re", "^.*$ > $TEXT", "p");
 "&2. Replace 'query' with 'text' (Case Insesitive) : InsensitiveReplace"
-	Input("%QUERY%", "Query to replace.");
-	Input("%TEXT%", "Text to replace Query with.");
-	Rename("re", "%QUERY% > %TEXT%", "p");
+	Input($QUERY, "Query to replace.");
+	Input($TEXT, "Text to replace Query with.");
+	Rename("re", "$QUERY > $TEXT", "p");
 "&3. Replace 'query' with 'text' (Case Sensitive) : SensitiveReplace"
-	Input("%QUERY%", "Query to replace.");
-	Input("%TEXT%", "Text to replace Query with.");
-	Rename("re", "%QUERY% > %TEXT%\", "p");
+	Input($QUERY, "Query to replace.");
+	Input($TEXT, "Text to replace Query with.");
+	Rename("re", "$QUERY > $TEXT\", "p");
 
 //------------------------------------------------------------------
 "-"
@@ -28,15 +28,15 @@
 //TRIMMING
 
 "&4. Remove 'n' characters from left : TrimLeft"
-	Input("%N%", "Number of characters to remove from left of filename (and extension).");
-	Rename("re", "^(?:.{%N%}(.*))|.*$ > $1", "p");
+	Input($N, "Number of characters to remove from left of filename (and extension).");
+	Rename("re", "^(?:.{$N}(.*))|.*$ > $1", "p");
 "&5. Remove 'n' characters from right : TrimRight"
-	Input("%N%", "Number of characters to remove from right of filename (and extension).");
-	Rename("re", "^(?:(.*).{%N%})|.*$ > $1", "p");
-"&6. Remove v'n' character at position 'x' : TrimMid"
-	Input("%X%", "Position at which to start removing characters from filename (and extension).  (Leftmost = 0)");
-	Input("%N%", "Number of characters to remove from filename (and extension) starting at given position.");
-	Rename("re", "^(.{%X%})(?:(?:.{%N%}(.*))|.*)$ > $1$2", "p");
+	Input($N, "Number of characters to remove from right of filename (and extension).");
+	Rename("re", "^(?:(.*).{$N})|.*$ > $1", "p");
+"&6. Remove 'n' character at position 'x' : TrimMid"
+	Input($X, "Position at which to start removing characters from filename (and extension).  (Leftmost = 0)");
+	Input($N, "Number of characters to remove from filename (and extension) starting at given position.");
+	Rename("re", "^(.{$X})(?:(?:.{$N}(.*))|.*)$ > $1$2", "p");
 
 //------------------------------------------------------------------
 "-"
@@ -44,12 +44,12 @@
 //INSERTION
 
 "&7. Insert 'text' before filename : Prepend"
-	Input("%TEXT%", "Text to insert before filename (and extension).");
-	Rename("re", "^ > %TEXT%", "p");
+	Input($TEXT, "Text to insert before filename (and extension).");
+	Rename("re", "^ > $TEXT", "p");
 "&8. Insert 'text' after filename : Append"
-	Input("%TEXT%", "Text to insert after filename (and extension).");
-	Rename("re", "$ > %TEXT%", "p");
+	Input($TEXT, "Text to insert after filename (and extension).");
+	Rename("re", "$ > $TEXT", "p");
 "&9. Insert 'text' after character 'x' : Insert"
-	Input("%X%", "Position at which to insert text into filename (and extension).  (Leftmost = 0)");
-	Input("%TEXT%", "Text to insert into filename (and extension).");
-	Rename("re", "^(?:(?:(.{%X%})(.*))|(.*))$ > $1$3%TEXT%$2", "p");
+	Input($X, "Position at which to insert text into filename (and extension).  (Leftmost = 0)");
+	Input($TEXT, "Text to insert into filename (and extension).");
+	Rename("re", "^(?:(?:(.{$X})(.*))|(.*))$ > $1$3$TEXT$2", "p");

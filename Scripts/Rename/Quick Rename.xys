@@ -36,4 +36,4 @@
 
 //Open RegExp-Renamer Menu
 "&7. RegExp-Rename : RegExp-Rename"
-	Load("Rename\RegExp-Rename.xys","","f");
+	Load("Rename\RegExp-Rename.xys");

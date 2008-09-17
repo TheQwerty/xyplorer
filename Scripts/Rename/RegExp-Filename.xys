@@ -10,8 +10,8 @@
 //TEXT REPLACEMENT
 
 "&1. Replace with 'text' : Replace"
-	Input("%TEXT%", "Text to replace filename with.");
-	Rename("re", "^.+?(\.[^\.]*)?$ > %TEXT%$1", "p");
+	Input($TEXT, "Text to replace filename with.");
+	Rename("re", "^.+?(\.[^\.]*)?$ > $TEXT$1", "p");
 
 //------------------------------------------------------------------
 "-"
@@ -19,15 +19,15 @@
 //TRIMMING
 
 "&2. Remove 'n' characters from left : TrimLeft"
-	Input("%N%", "Number of characters to remove from left of filename.");
-	Rename("re", "^(?:.{%N%,}?(.*\.[^\.]*))|(?:.{0,%N%}(\.[^\.]*))|(?:.{0,%N%}(.*))$ > $1$2$3", "p");
+	Input($N, "Number of characters to remove from left of filename.");
+	Rename("re", "^(?:.{$N,}?(.*\.[^\.]*))|(?:.{0,$N}(\.[^\.]*))|(?:.{0,$N}(.*))$ > $1$2$3", "p");
 "&3. Remove 'n' characters from right : TrimRight"
-	Input("%N%", "Number of characters to remove from right of filename.");
-	Rename("re", "^(?:(.*).{%N%}(\.[^\.]*))|(?:.{0,%N%}(\.[^\.]*))|(?:(.*?).{0,%N%})$ > $1$2$3$4", "p");
+	Input($N, "Number of characters to remove from right of filename.");
+	Rename("re", "^(?:(.*).{$N}(\.[^\.]*))|(?:.{0,$N}(\.[^\.]*))|(?:(.*?).{0,$N})$ > $1$2$3$4", "p");
 "&4. Remove 'n' characters starting after character 'x' : TrimMid"
-	Input("%X%", "Position at which to start removing characters from filename. (Leftmost = 0)");
-	Input("%N%", "Number of characters to remove from filename starting at given position.");
-	Rename("re", "^(.{%X%})(?:(?:(?:(?:.{%N%}(.*?))|(?:.*?))(\.[^\.]*))|(?:(?:(?:.{%N%}(.*?))|(?:.*?))))$ > $1$2$3$4", "p");
+	Input($X, "Position at which to start removing characters from filename. (Leftmost = 0)");
+	Input($N, "Number of characters to remove from filename starting at given position.");
+	Rename("re", "^(.{$X})(?:(?:(?:(?:.{$N}(.*?))|(?:.*?))(\.[^\.]*))|(?:(?:(?:.{$N}(.*?))|(?:.*?))))$ > $1$2$3$4", "p");
 
 //------------------------------------------------------------------
 "-"
@@ -35,12 +35,12 @@
 //INSERTION
 
 "&5. Insert 'text' on left : Prepend"
-	Input("%TEXT%", "Text to insert before filename.");
-	Rename("re", "^ > %TEXT%", "p");
+	Input($TEXT, "Text to insert before filename.");
+	Rename("re", "^ > $TEXT", "p");
 "&6. Insert 'text' on right : Append"
-	Input("%TEXT%", "Text to insert after filename.");
-	Rename("re", "^(.*?)(\.[^\.]*)?$ > $1%TEXT%$2", "p");
+	Input($TEXT, "Text to insert after filename.");
+	Rename("re", "^(.*?)(\.[^\.]*)?$ > $1$TEXT$2", "p");
 "&7. Insert 'text' after character 'x' : Insert"
-	Input("%X%", "Position at which to insert text into filename. (Leftmost = 0)");
-	Input("%TEXT%", "Text to insert into filename.");
-	Rename("re", "^(?:(?:(.{%X%})(.*?)(\.[^\.]*))|(?:(.*?)(\.[^\.]*))|(?:(.{%X%})(.*?))|(?:(.*)))$ > $1$4$6$8%TEXT%$2$3$5$7", "p");
+	Input($X, "Position at which to insert text into filename. (Leftmost = 0)");
+	Input($TEXT, "Text to insert into filename.");
+	Rename("re", "^(?:(?:(.{$X})(.*?)(\.[^\.]*))|(?:(.*?)(\.[^\.]*))|(?:(.{$X})(.*?))|(?:(.*)))$ > $1$4$6$8$TEXT$2$3$5$7", "p");
