@@ -3,57 +3,62 @@
 //		Tree & Catalog -> Tree -> Catalog -> None
 
 //#ID Definitions
-//193	Save Configuration
+//193	Save All Settings
 //663	Toggle Nav. Panel
 //664	Toggle Catalog
 //668	Toggle Tree
 
 "Cycle Forward : forward"
-	//Get Current Nav. Panel Settings
-	#193;
-	GetKey($n, "NavHide", "General");
+	//Construct Panel Visibility State Value (NavHide*4 + ShowTree*2 + ShowCatalog)
+	#193;	//Save All Settings
+	GetKey($v, "ShowCatalog", "General");
 	GetKey($t, "ShowTree", "General");
-	GetKey($c, "ShowCatalog", "General");
-	Set($v, "$n$t$c");
+	Incr($v,, ($t==1) ? 2 : 0);
+	GetKey($n, "NavHide", "General");
+	Incr($v,, ($n==1) ? 4 : 0);
 
-	//Empty NP -> Both
-	RegExReplace($v, $v, "^000$", "#668;#664;");
-	//Catalog -> None
-	RegExReplace($v, $v, "^001$", "#663;");
-	//Tree -> Catalog
-	RegExReplace($v, $v, "^010$", "#668;#664;");
-	//Both -> Tree
-	RegExReplace($v, $v, "^011$", "#664;");
-
-	//Various None States -> Both
-	RegExReplace($v, $v, "^100$", "#668;#664;#663;");
-	RegExReplace($v, $v, "^101$", "#668;#663;");
-	RegExReplace($v, $v, "^110$", "#664;#663;");
-	RegExReplace($v, $v, "^111$", "#663;");
+	/*
+		Currently the operators only perform string comparisons,
+		but when numerical comparisons are valid we will want
+		these assertions.
+		Assert($v > 7, "Invalid Panel Visibility State Value ($v).");
+		Assert($v < 0, "Invalid Panel Visibility State Value ($v).");
+	*/
+	$v = ($v == 0) ? "#668;#664;" : $v;	//Empty NP -> Both
+	$v = ($v == 1) ? "#664;" : $v;		//Catalog -> None
+	$v = ($v == 2) ? "#664;#668;" : $v;	//Tree	 -> Catalog
+	$v = ($v == 3) ? "#664;" : $v;		//Both	 -> Tree
+	$v = ($v == 4) ? "#668;#664;" : $v;	//None (NP-off, Tree, Catalog-on) -> Both
+	$v = ($v == 5) ? "#668;" : $v;		//None (NP, Tree-off; Catalog-on) -> Both
+	$v = ($v == 6) ? "#664;" : $v;		//None (NP, Catalog-off; Tree-on) -> Both
+	$v = ($v == 7) ? "#663;" : $v;		//None (All-off) -> Both
 
 	Load($v,,"s");
 
 "Cycle Backward : backward"
-	//Get Current Nav. Panel Settings
-	#193;
-	GetKey($n, "NavHide", "General");
+	//Construct Panel Visibility State Value (NavHide*4 + ShowTree*2 + ShowCatalog)
+	#193;	//Save All Settings
+	GetKey($v, "ShowCatalog", "General");
 	GetKey($t, "ShowTree", "General");
-	GetKey($c, "ShowCatalog", "General");
-	Set($v, "$n$t$c");
+	Incr($v,, ($t==1) ? 2 : 0);
+	GetKey($n, "NavHide", "General");
+	Incr($v,, ($n==1) ? 4 : 0);
 
-	//Empty NP -> Catalog
-	RegExReplace($v, $v, "^000$", "#664;");
-	//Catalog -> Tree
-	RegExReplace($v, $v, "^001$", "#668;#664;");
-	//Tree -> Both
-	RegExReplace($v, $v, "^010$", "#664;");
-	//Both -> None
-	RegExReplace($v, $v, "^011$", "#663;");
-
-	//Various None States -> Catalog
-	RegExReplace($v, $v, "^100$", "#664;#663;");
-	RegExReplace($v, $v, "^101$", "#663;");
-	RegExReplace($v, $v, "^110$", "#668;#664;#663;");
-	RegExReplace($v, $v, "^111$", "#668;#663;");
+	/*
+		Currently the operators only perform string comparisons,
+		but when numerical comparisons are valid we will want
+		these assertions.
+		Assert($v > 7, "Invalid Panel Visibility State Value ($v).");
+		Assert($v < 0, "Invalid Panel Visibility State Value ($v).");
+	*/
+	$v = ($v == 0) ? "#664;" : $v;		//Empty NP -> Catalog
+	$v = ($v == 1) ? "#668;#664;" : $v;	//Catalog -> Tree
+	$v = ($v == 2) ? "#664;" : $v;		//Tree -> Both
+	$v = ($v == 3) ? "#663;" : $v;		//Both -> None
+	$v = ($v == 4) ? "#664;" : $v;		//None (NP-off, Tree, Catalog-on) -> Catalog
+	$v = ($v == 5) ? "#663;" : $v;		//None (NP, Tree-off; Catalog-on) -> Catalog
+	$v = ($v == 6) ? "#668;#664;" : $v;	//None (NP, Catalog-off; Tree-on) -> Catalog
+	$v = ($v == 7) ? "#668;" : $v;		//None (All-off) -> Catalog
 
 	Load($v,,"s");
+
