@@ -22,7 +22,7 @@ KeyWordLength = 0
 BracketChars = {[()]}
 
 ;Characters that are used for operators.
-OperatorChars =<.=!>
+OperatorChars =<.=!>+-*/
 
 ;Character that starts pre-processor statements.
 PreprocStart =
@@ -72,7 +72,7 @@ CharEsc =
 ;-------------------------------------------
 
 
-;FUNCTION COMMANDS
+;COMMANDS
 [Keywords 1]
 AddStr
 Assert
@@ -84,10 +84,11 @@ CopyTextA
 CopyTo
 Delete
 Download
+Echo
 Filter
 Focus
-GetInfo
 GetKey
+Global
 Goto
 Highlight
 Incr
@@ -1667,5 +1668,21 @@ Write
 <srcver>
 <xydata>
 <xyexe>
+<xyini>
 <xypath>
 <xyver>
+
+;FUNCTIONS
+[Keywords 4]
+Chr
+Compare
+Confirm
+Eval
+GetInfo
+MD5
+Quote
+ReadFile
+Report
+URLDecode
+URLEncode
+WriteFile

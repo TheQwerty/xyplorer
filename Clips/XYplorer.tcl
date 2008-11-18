@@ -79,6 +79,9 @@
 !TEXT=<xyexe>
 <xyexe>
 !
+!TEXT=<xyini>
+<xyini>
+!
 !TEXT=<xypath>
 <xypath>
 !
@@ -107,6 +110,15 @@ Box([Color=""/Off], [Folder=""/Current]);
 !TEXT=BR
 BR(NewLine);
 !
+!TEXT=Chr()
+Chr(charCode)
+!
+!TEXT=Compare()
+Compare(A, B, [Method:b|i|n|v])
+!
+!TEXT=Confirm()
+Confirm(Message, [LineBreak="<br>"])
+!
 !TEXT=CopyText
 CopyText(Text, [Append?:|a=""/Copy], [LineBreak="<br>"]);
 !
@@ -115,7 +127,7 @@ CopyText(Text, [Append?:|a=""/Copy], [LineBreak="<br>"]);
 CopyTextA(Text);
 !
 !TEXT=CopyTo
-CopyTo(Location, [Source=Current Selection]);
+CopyTo(Location, [Source=Current Selection], [RootPath=None]);
 !
 !TEXT=Delete
 Delete([Recycle?:1|0], [Confirm?:|1|0=""/User Setting], [Item=Current Selection]);
@@ -123,17 +135,26 @@ Delete([Recycle?:1|0], [Confirm?:|1|0=""/User Setting], [Item=Current Selection]
 !TEXT=Download
 Download(Source, [Target="Download-yyyymmdd.html"], [Options:|o|i=""/Prompt on Collision]);
 !
+!TEXT=Echo
+Echo([Text=""]);
+!
+!TEXT=Eval()
+Eval(Expression)
+!
 !TEXT=Filter
 Filter([Pattern="|"/Off]);
 !
 !TEXT=Focus
 Focus([Control:List|Tree|Address Bar|Catalog]);
 !
-!TEXT=GetInfo
-GetInfo(Variable, Info, [Params]);
+!TEXT=GetInfo()
+GetInfo(Info, [Params])
 !
 !TEXT=GetKey
 GetKey(Variable, Key, Section, [File=""/XY Config]);
+!
+!TEXT=Global
+Global(Var1, ..., Var10);
 !
 !TEXT=GoTo
 GoTo(Location);
@@ -157,7 +178,7 @@ InputFolder(Variable, [Path=XY's Path], [Prompt=""]);
 InternetFlags(Setting, Mode:1|0);
 !
 !TEXT=Load
-Load(Resource, [Labels:|#[#]|[Label]|[List]=""/Display menu], [ResourceType:f|s=f/File]);
+Load(Resource, [Labels:|#[#]|[Label]|[List]=""|*/Display menu], [ResourceType:f|s=f/File]);
 !
 !TEXT=LoadScriptFile
 //DEPRECATED: Replaced by Load();
@@ -166,8 +187,11 @@ LoadScriptFile(ScriptFile, [Execute:|#[#]|[Label]=""/Display menu]);
 !TEXT=LoadSearch
 LoadSearch(Template, [Options:rlex=rl/Load Location & Execute]);
 !
+!TEXT=MD5()
+MD5(String)
+!
 !TEXT=MoveTo
-MoveTo(Location, [Source=Current Selection]);
+MoveTo(Location, [Source=Current Selection], [RootPath=None]);
 !
 !TEXT=Msg
 Msg([Text=""], [Buttons:0/OK|1/OKCancel=0/OK], [LineBreak="<br>"]);
@@ -185,6 +209,12 @@ OpenWith([Application="explorer.exe"], [Multiple?:s|m], [Item]);
 //DEPRECATED: Replaced by Try();
 Push();
 !
+!TEXT=Quote()
+Quote([String])
+!
+!TEXT=ReadFile()
+ReadFile(File, [Mode:t|b])
+!
 !TEXT=ReadURL
 ReadURL(Variable, URL);
 !
@@ -196,6 +226,9 @@ Rename([Mode:b|r|s|k|e], [Pattern=""/Show Dialog], [Preview?:|p=""/Single], [Ite
 !
 !TEXT=Repalce
 Replace(Variable, String, Query, [Replacement], [MatchCase?:0|1]);
+!
+!TEXT=Report()
+Report([Template=""/List Layout], [OnlySelected:0|1], [Header=""], [Footer=""])
 !
 !TEXT=Run
 Run(Command);
@@ -268,6 +301,7 @@ Text(Text, [Width=500], [Height=300], [Caption=""], [Wrap?:|w=""/No Wrapping], [
 TimeStamp([Type:c|m|a=cma/All], [Date=""/Now], [Item=""/List Selection]);
 !
 !TEXT=Try
+//DEPRECATED: Replaced by #752;
 Try();
 !
 !TEXT=UnSet
@@ -276,6 +310,12 @@ UnSet(Variable);
 !TEXT=UnStep
 UnStep();
 !
+!TEXT=URLDecode()
+URLDecode(String, [Raw?:0|1])
+!
+!TEXT=URLEncode()
+URLEncode(String, [Raw?:0|1])
+!
 !TEXT=UserInput
 //DEPRECATED: Replaced by Input();
 UserInput(Variable, [Prompt=""], [DefaultValue=""]);
@@ -283,4 +323,7 @@ UserInput(Variable, [Prompt=""], [DefaultValue=""]);
 !TEXT=Write
 //DEPRECATED: Replaced by Try();
 Write();
+!
+!TEXT=WriteFile()
+WriteFile(File, Data, [OnExist:o|a|n], [Mode:t|ta|tu|b])
 !
