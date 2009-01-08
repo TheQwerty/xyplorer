@@ -1,0 +1,45 @@
+/******************************************************************************
+	ViewMenu.xys
+
+	This script is a demo of XY's HTML function.
+
+	When executed it will display an HTML dialog, and the user can select which
+	options should be executed upon submission.  When the user submits the form
+	the selected options will be performed and depending on which button was
+	used the script will either end or return the user to the HTML dialog.
+
+	This script demonstrates this by allowing the user to change two-state
+	options found within the submenus of the main View menu.  Unfortunately,
+	the method used by XY to store the state of these options within the config
+	file makes it a bit difficult to retrieve the state and display it in the
+	HTML dialog.  As such, selecting an option will run the associated script
+	command, and for the majority of them this will toggle the current state.
+
+
+	Requires:
+		XYplorer v7.90.0029+
+		ViewMenu.html
+******************************************************************************/
+
+"Display View Option Dialog" Self($script, "File");
+	//This script requires Recursion.
+	Setting("AllowRecursion", 1);
+
+	//Display Options Form.
+	RegExReplace($html, $script, "\.xys$", ".html");
+	$input = URLDecode(HTML($html));
+
+	//If Apply submitted, Loop script.
+	StrPos($pos, $input, "Submit=Apply");
+	$input = ($pos >= 0) ? "$input&c0=Load(""$script"")" : $input;
+
+	//If Cancel submitted, Ignore other parameters.
+	StrPos($pos, $input, "Submit=Cancel");
+	$input = ($pos >= 0) ? "" : $input;
+
+	RegExReplace($input, $input, "[?&]Submit=[A-z]+","");	//Remove Submit params.
+	RegExReplace($input, $input, "[?&]c[0-9]+=",";");		//Remove Options param names and insert ;s.
+	RegExReplace($input, $input, "^[?;]","");				//Remove ? or ; from start of script.  This shouldn't be needed.
+
+	//Execute the selected options.
+	Load("$input;",, "s");

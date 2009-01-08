@@ -123,7 +123,7 @@ Confirm(Message, [LineBreak="<br>"])
 CopyText(Text, [Append?:|a=""/Copy], [LineBreak="<br>"]);
 !
 !TEXT=CopyTextA
-//DEPRECATED: Replaced by CopyText();
+//DEPRECATED: Replaced by CopyText
 CopyTextA(Text);
 !
 !TEXT=CopyTo
@@ -137,6 +137,9 @@ Download(Source, [Target="Download-yyyymmdd.html"], [Options:|o|i=""/Prompt on C
 !
 !TEXT=Echo
 Echo([Text=""]);
+!
+!TEXT=End
+End(Expression, [Message], [Scope:0/"All"|1/"This"]);
 !
 !TEXT=Eval()
 Eval(Expression)
@@ -153,6 +156,9 @@ GetInfo(Info, [Params])
 !TEXT=GetKey
 GetKey(Variable, Key, Section, [File=""/XY Config]);
 !
+!TEXT=GetToken()
+GetToken(String, [Index=1], [Delimiter=" ")
+!
 !TEXT=Global
 Global(Var1, ..., Var10);
 !
@@ -162,11 +168,18 @@ GoTo(Location);
 !TEXT=Highlight
 Highlight([Color=""/Off], [Folder=""/Current]);
 !
+!TEXT=HTML()
+HTML(Content, [Width=600], [Height=400], [Caption="XYplorer"])
+!
 !TEXT=Incr
 Incr(Variable, [Value=Variable], [Increment="1"]);
 !
 !TEXT=Input
+//DEPRECATED: Replaced by Input()
 Input(Variable, [Prompt=""], [DefaultValue=""], [Style:|m|w=""/Single]);
+!
+!TEXT=Input()
+Input([Title], [Notes], [Default], [Style:s|m|w], [Cancel])
 !
 !TEXT=InputFile
 InputFile(Variable, [Path=XY's Path], [Extension=""], [Prompt="Open"]);
@@ -181,11 +194,14 @@ InternetFlags(Setting, Mode:1|0);
 Load(Resource, [Labels:|#[#]|[Label]|[List]=""|*/Display menu], [ResourceType:f|s=f/File]);
 !
 !TEXT=LoadScriptFile
-//DEPRECATED: Replaced by Load();
+//DEPRECATED: Replaced by Load
 LoadScriptFile(ScriptFile, [Execute:|#[#]|[Label]=""/Display menu]);
 !
 !TEXT=LoadSearch
 LoadSearch(Template, [Options:rlex=rl/Load Location & Execute]);
+!
+!TEXT=LoadTree
+LoadTree([Paths=""/<curpath>], [Modify:0/Load|1/Add|2/Remove]);
 !
 !TEXT=MD5()
 MD5(String)
@@ -206,14 +222,14 @@ Open([Item="explorer.exe <xypath>"], [Association:|w/Windows=""/PFA]);
 OpenWith([Application="explorer.exe"], [Multiple?:s|m], [Item]);
 !
 !TEXT=Push
-//DEPRECATED: Replaced by Try();
+//DEPRECATED: Replaced by Try
 Push();
 !
 !TEXT=Quote()
 Quote([String])
 !
 !TEXT=ReadFile()
-ReadFile(File, [Mode:t|b])
+ReadFile([File=Focused Item], [Mode:t|b])
 !
 !TEXT=ReadURL
 ReadURL(Variable, URL);
@@ -231,7 +247,7 @@ Replace(Variable, String, Query, [Replacement], [MatchCase?:0|1]);
 Report([Template=""/List Layout], [OnlySelected:0|1], [Header=""], [Footer=""])
 !
 !TEXT=Run
-Run(Command);
+Run(Command, [CWD=""/<curpath>], [Wait?:0|1]);
 !
 !TEXT=Sel
 Sel([Type:|[|+|-][#]|"[pattern]"|a|i|f=""/Deselect All], [Count=1]);
@@ -243,7 +259,7 @@ Self(Variable, [Info:|File|Path|Base|Script=""/Nothing]);
 SelFilter([Pattern=""/All], [Type:|f|d=""/Both], [Column="Name"]);
 !
 !TEXT=SelPos
-//DEPRECATED: Replaced by Sel();
+//DEPRECATED: Replaced by Sel
 SelPos([Type:|[|+|-][#]|"[pattern]"|a|i|f=""/Deselect All], [Count=1]);
 !
 !TEXT=SelTab
@@ -285,6 +301,9 @@ StrLen(Variable, String);
 !TEXT=StrPos
 StrPos(Variable, String, Query, [Start="0"], [MatchCase?:0|1]);
 !
+!TEXT=StrRepeat()
+StrRepeat(String, Times)
+!
 !TEXT=Sub
 Sub(Label);
 !
@@ -301,7 +320,7 @@ Text(Text, [Width=500], [Height=300], [Caption=""], [Wrap?:|w=""/No Wrapping], [
 TimeStamp([Type:c|m|a=cma/All], [Date=""/Now], [Item=""/List Selection]);
 !
 !TEXT=Try
-//DEPRECATED: Replaced by #752;
+//DEPRECATED: Replaced by #752
 Try();
 !
 !TEXT=UnSet
@@ -317,11 +336,11 @@ URLDecode(String, [Raw?:0|1])
 URLEncode(String, [Raw?:0|1])
 !
 !TEXT=UserInput
-//DEPRECATED: Replaced by Input();
+//DEPRECATED: Replaced by Input()
 UserInput(Variable, [Prompt=""], [DefaultValue=""]);
 !
 !TEXT=Write
-//DEPRECATED: Replaced by Try();
+//DEPRECATED: Replaced by Try()
 Write();
 !
 !TEXT=WriteFile()

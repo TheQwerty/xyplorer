@@ -1,0 +1,187 @@
+<!--
+	ViewMenu.html
+
+	This file is a resource for ViewMenu.xys.
+	Please see the comments within the script file for more details.
+-->
+<HTML>
+	<HEAD>
+		<STYLE type="text/css">
+			a { text-decoration: none; color: #000; }
+			body { background: #ECE9D8; }
+			table.options { width: 98%; display: none; border: thin solid black; }
+			.content { overflow: scroll; height: 228px; background: #FFF; }
+		</STYLE>
+		<SCRIPT type="text/javascript">
+			function folder(id, text) {
+				var table = document.getElementById(id + "Table");
+				var state = document.getElementById(id + "State");
+				var current = table.style.display;
+
+				if (current == "none" || current == "") {
+					table.style.display = "block";
+					state.innerHTML = "-";
+				} else {
+					table.style.display = "none";
+					state.innerHTML = "+";
+				}
+			}
+		</SCRIPT>
+	</HEAD>
+	<BODY>
+		<FORM action="xys:">
+			<DIV><B>Select the options you'd like to toggle.</B></DIV>
+			<DIV class="content">
+				<!-- COLUMNS SUBMENU -->
+				<DIV id="Columns">
+					<A href="#" onclick="folder('Columns');"><SPAN id="ColumnsState">+</SPAN>Columns</A>
+					<TABLE id="ColumnsTable" class="options">
+						<TR><TD>
+							<INPUT type="checkbox" value="#361" name="c01" id="c01" /><LABEL for="c01">Line Numbers</LABEL>
+							<HR />
+							<INPUT type="checkbox" value="#362" name="c02" id="c02" /><LABEL for="c02">Name</LABEL><BR />
+							<INPUT type="checkbox" value="#363" name="c03" id="c03" /><LABEL for="c03">Extension</LABEL><BR />
+							<INPUT type="checkbox" value="#364" name="c04" id="c04" /><LABEL for="c04">Size</LABEL><BR />
+							<INPUT type="checkbox" value="#365" name="c05" id="c05" /><LABEL for="c05">Type</LABEL><BR />
+							<INPUT type="checkbox" value="#366" name="c06" id="c06" /><LABEL for="c06">Created</LABEL><BR />
+							<INPUT type="checkbox" value="#367" name="c07" id="c07" /><LABEL for="c07">Modified</LABEL><BR />
+							<INPUT type="checkbox" value="#368" name="c08" id="c08" /><LABEL for="c08">Accessed</LABEL><BR />
+							<INPUT type="checkbox" value="#369" name="c09" id="c09" /><LABEL for="c09">Attributes</LABEL>
+							<HR />
+							<INPUT type="checkbox" value="#370" name="c10" id="c10" /><LABEL for="c10">Path</LABEL>
+						</TD><TD>
+							<INPUT type="checkbox" value="#371" name="c11" id="c11" /><LABEL for="c11">Show All Columns</LABEL><BR />
+							<INPUT type="checkbox" value="#372" name="c12" id="c12" /><LABEL for="c12">Autosize Columns Now</LABEL><BR />
+							<INPUT type="checkbox" value="#373" name="c13" id="c13" /><LABEL for="c13">Grow Name Column</LABEL><BR />
+							<INPUT type="checkbox" value="#374" name="c14" id="c14" /><LABEL for="c14">Shrink Name Column</LABEL>
+							<HR />
+							<INPUT type="checkbox" value="#376" name="c15" id="c15" /><LABEL for="c15">Define Current Column Layout as Default</LABEL><BR />
+							<INPUT type="checkbox" value="#377" name="c16" id="c16" /><LABEL for="c16">Restore Column Layout from Default</LABEL>
+							<HR />
+							<INPUT type="checkbox" value="#378" name="c17" id="c17" /><LABEL for="c17">Set Line Number Column Width...</LABEL>
+						</TD></TR>
+					</TABLE>
+				</DIV>
+
+				<!-- TREE STYLE SUBMENU -->
+				<DIV id="TreeStyle">
+					<A href="#" onclick="folder('TreeStyle');"><SPAN id="TreeStyleState">+</SPAN>Tree Style</A>
+					<TABLE id="TreeStyleTable" class="options">
+						<TR><TD>
+							<INPUT type="checkbox" value="#391" name="c18" id="c18" /><LABEL for="c18">Show Icons</LABEL><BR />
+							<INPUT type="checkbox" value="#392" name="c19" id="c19" /><LABEL for="c19">Show Plus/Minus</LABEL><BR />
+							<INPUT type="checkbox" value="#393" name="c20" id="c20" /><LABEL for="c20">Show Lines</LABEL>
+						</TD><TD>
+							<INPUT type="checkbox" value="#394" name="c21" id="c21" /><LABEL for="c21">Mark Favorites (Icon)</LABEL><BR />
+							<INPUT type="checkbox" value="#395" name="c22" id="c22" /><LABEL for="c22">Mark Favorites (Bold)</LABEL><BR />
+							<INPUT type="checkbox" value="#396" name="c23" id="c23" /><LABEL for="c23">Narrow Tree</LABEL><BR />
+							<INPUT type="checkbox" value="#397" name="c24" id="c24" /><LABEL for="c24">Rename On Slow Double-Click</LABEL>
+						</TD></TR>
+					</TABLE>
+				</DIV>
+
+				<!-- LIST STYLE SUBMENU -->
+				<DIV id="ListStyle">
+					<A href="#" onclick="folder('ListStyle');"><SPAN id="ListStyleState">+</SPAN>List Style</A>
+					<TABLE id="ListStyleTable" class="options">
+						<TR><TD>
+							<INPUT type="checkbox" value="#401" name="c25" id="c25" /><LABEL for="c25">Show Icons</LABEL><BR />
+							<INPUT type="checkbox" value="#402" name="c26" id="c26" /><LABEL for="c26">Column Drag</LABEL><BR />
+							<INPUT type="checkbox" value="#403" name="c27" id="c27" /><LABEL for="c27">Multiple Select</LABEL><BR />
+							<INPUT type="checkbox" value="#404" name="c28" id="c28" /><LABEL for="c28">Full Row Select</LABEL><BR />
+							<INPUT type="checkbox" value="#405" name="c29" id="c29" /><LABEL for="c29">Highlight Sorted Column</LABEL><BR />
+							<INPUT type="checkbox" value="#406" name="c30" id="c30" /><LABEL for="c30">Show Line Numbers</LABEL>
+						</TD><TD>
+							<INPUT type="checkbox" value="#407" name="c31" id="c31" /><LABEL for="c31">Autosize Columns</LABEL><BR />
+							<INPUT type="checkbox" value="#408" name="c32" id="c32" /><LABEL for="c32">Show Grid</LABEL><BR />
+							<INPUT type="checkbox" value="#409" name="c33" id="c33" /><LABEL for="c33">Highlight Focused Item</LABEL><BR />
+							<INPUT type="checkbox" value="#410" name="c34" id="c34" /><LABEL for="c34">Highlight Selected Rows</LABEL><BR />
+							<INPUT type="checkbox" value="#411" name="c35" id="c35" /><LABEL for="c35">Rename on Slow Double-Click</LABEL><BR />
+							<INPUT type="checkbox" value="#412" name="c36" id="c36" /><LABEL for="c36">Hide Extensions</LABEL>
+						</TD></TR>
+					</TABLE>
+				</DIV>
+
+				<!-- SIZE COLUMN FORMAT SUBMENU -->
+				<DIV id="SizeCol">
+					<A href="#" onclick="folder('SizeCol');"><SPAN id="SizeColState">+</SPAN>Size Column Format</A>
+					<TABLE id="SizeColTable" class="options">
+						<TR><TD>
+							<INPUT type="checkbox" value="#431" name="c37" id="c37" /><LABEL for="c37">Show Folder Sizes</LABEL><BR />
+							<INPUT type="checkbox" value="#421" name="c38" id="c38" /><LABEL for="c38">Show Space Used</LABEL>
+							<HR />
+							<INPUT type="checkbox" value="#422" name="c39" id="c39" /><LABEL for="c39">Raw Bytes Count</LABEL><BR />
+							<INPUT type="checkbox" value="#423" name="c40" id="c40" /><LABEL for="c40">Bytes</LABEL><BR />
+							<INPUT type="checkbox" value="#424" name="c41" id="c41" /><LABEL for="c41">KB (Rounded Up)</LABEL><BR />
+							<INPUT type="checkbox" value="#425" name="c42" id="c42" /><LABEL for="c42">KB</LABEL>
+						</TD><TD>
+							<INPUT type="checkbox" value="#426" name="c43" id="c43" /><LABEL for="c43">MB</LABEL><BR />
+							<INPUT type="checkbox" value="#427" name="c44" id="c44" /><LABEL for="c44">GB</LABEL><BR />
+							<INPUT type="checkbox" value="#428" name="c45" id="c45" /><LABEL for="c45">Flexible</LABEL><BR />
+							<INPUT type="checkbox" value="#429" name="c46" id="c46" /><LABEL for="c46">Flexible (Rounded Up)</LABEL><BR />
+							<INPUT type="checkbox" value="#430" name="c47" id="c47" /><LABEL for="c47">Clusters</LABEL>
+						</TD></TR>
+					</TABLE>
+				</DIV>
+
+				<!-- DATE COLUMN FORMAT SUBMENU -->
+				<DIV id="DateCol">
+					<A href="#" onclick="folder('DateCol');"><SPAN id="DateColState">+</SPAN>Date Column Format</A>
+					<TABLE id="DateColTable" class="options">
+						<TR><TD>
+							<INPUT type="checkbox" value="#441" name="c50" id="c50" /><LABEL for="c50">Show Age</LABEL><BR />
+							<INPUT type="checkbox" value="#453" name="c51" id="c51" /><LABEL for="c51">Show Weekday</LABEL>
+							<HR />
+							<INPUT type="checkbox" value="#442" name="c52" id="c52" /><LABEL for="c52">m/d/yyyy</LABEL><BR />
+							<INPUT type="checkbox" value="#443" name="c53" id="c53" /><LABEL for="c53">dddd, mmmm, dd, yyyy</LABEL><BR />
+							<INPUT type="checkbox" value="#444" name="c54" id="c54" /><LABEL for="c54">dd/mm/yy</LABEL><BR />
+							<INPUT type="checkbox" value="#445" name="c55" id="c55" /><LABEL for="c55">dd/mm/yyyy</LABEL><BR />
+							<INPUT type="checkbox" value="#446" name="c56" id="c56" /><LABEL for="c56">mm/dd/yy</LABEL><BR />
+							<INPUT type="checkbox" value="#447" name="c57" id="c57" /><LABEL for="c57">mm/dd/yyyy</LABEL><BR />
+							<INPUT type="checkbox" value="#448" name="c58" id="c58" /><LABEL for="c58">dd-mmm-yy</LABEL><BR />
+							<INPUT type="checkbox" value="#449" name="c59" id="c59" /><LABEL for="c59">dd-mmm-yyyy</LABEL>
+						</TD><TD>
+							<INPUT type="checkbox" value="#450" name="c60" id="c60" /><LABEL for="c60">yyyy-mm-dd (ISO 8601)</LABEL><BR />
+							<INPUT type="checkbox" value="#451" name="c61" id="c61" /><LABEL for="c61">yyyy-ww-w (ISO Week)</LABEL><BR />
+							<INPUT type="checkbox" value="#452" name="c62" id="c62" /><LABEL for="c62">Sign (Zodiac)</LABEL>
+							<HR />
+							<INPUT type="checkbox" value="#460" name="c63" id="c63" /><LABEL for="c63">hh:nn:ss</LABEL><BR />
+							<INPUT type="checkbox" value="#461" name="c64" id="c64" /><LABEL for="c64">hh:nn</LABEL><BR />
+							<INPUT type="checkbox" value="#462" name="c65" id="c65" /><LABEL for="c65">hh:nn am/pm</LABEL><BR />
+							<INPUT type="checkbox" value="#463" name="c66" id="c66" /><LABEL for="c66">hh:nn AM/PM</LABEL><BR />
+							<INPUT type="checkbox" value="#464" name="c67" id="c67" /><LABEL for="c67">hh:nn:ss (ISO 8601)</LABEL><BR />
+							<INPUT type="checkbox" value="#465" name="c68" id="c68" /><LABEL for="c68">No Time</LABEL>
+						</TD></TR>
+					</TABLE>
+				</DIV>
+
+				<!-- SHOW ITEMS SUBMENU -->
+				<DIV id="ShowItems">
+					<A href="#" onclick="folder('ShowItems');"><SPAN id="ShowItemsState">+</SPAN>Show Items</A>
+					<TABLE id="ShowItemsTable" class="options">
+						<TR><TD>
+							<INPUT type="checkbox" value="#491" name="c69" id="c69" /><LABEL for="c69">Show Floppy Drives</LABEL><BR />
+							<INPUT type="checkbox" value="#492" name="c70" id="c70" /><LABEL for="c70">Show Hidden Drives</LABEL><BR />
+							<INPUT type="checkbox" value="#493" name="c71" id="c71" /><LABEL for="c71">Show Hidden Files and Folders</LABEL><BR />
+							<INPUT type="checkbox" value="#494" name="c72" id="c72" /><LABEL for="c72">Show System Files and Folders</LABEL>
+						</TD><TD>
+							<INPUT type="checkbox" value="#495" name="c73" id="c73" /><LABEL for="c73">Show My Network Places</LABEL><BR />
+							<INPUT type="checkbox" value="#496" name="c74" id="c74" /><LABEL for="c74">Show Folders in List</LABEL>
+							<HR />
+							<INPUT type="checkbox" value="#498" name="c75" id="c75" /><LABEL for="c75">WOW64 Redirection (64-bit only)</LABEL>
+						</TD></TR>
+					</TABLE>
+				</DIV>
+			</DIV>
+			<DIV>
+				<TABLE>
+					<TR>
+						<TD><INPUT type="submit" name="Submit" value="OK" /></TD>
+						<TD><INPUT type="submit" name="Submit" value="Apply" /></TD>
+						<TD><INPUT type="submit" name="Submit" value="Cancel" /></TD>
+					</TR>
+				</TABLE>
+			</DIV>
+		</FORM>
+	</BODY>
+</HTML>
