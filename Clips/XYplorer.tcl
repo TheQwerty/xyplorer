@@ -179,7 +179,7 @@ Incr(Variable, [Value=Variable], [Increment="1"]);
 Input(Variable, [Prompt=""], [DefaultValue=""], [Style:|m|w=""/Single]);
 !
 !TEXT=Input()
-Input([Title], [Notes], [Default], [Style:s|m|w], [Cancel])
+Input([Title], [Notes], [Default], [Style:s|m|w], [Cancel], [Width=600], [Height=400])
 !
 !TEXT=InputFile
 InputFile(Variable, [Path=XY's Path], [Extension=""], [Prompt="Open"]);
