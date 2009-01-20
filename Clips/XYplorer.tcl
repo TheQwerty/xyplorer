@@ -302,7 +302,7 @@ StrLen(Variable, String);
 StrPos(Variable, String, Query, [Start="0"], [MatchCase?:0|1]);
 !
 !TEXT=StrRepeat()
-StrRepeat(String, Times)
+StrRepeat(String, [Times=0])
 !
 !TEXT=Sub
 Sub(Label);
