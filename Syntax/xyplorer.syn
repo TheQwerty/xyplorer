@@ -1691,4 +1691,6 @@ Report
 StrRepeat
 URLDecode
 URLEncode
+UTF8Decode
+UTF8Encode
 WriteFile

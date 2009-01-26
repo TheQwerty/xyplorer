@@ -335,6 +335,12 @@ URLDecode(String, [Raw?:0|1])
 !TEXT=URLEncode()
 URLEncode(String, [Raw?:0|1])
 !
+!TEXT=UTF8Decode()
+UTF8Decode(String)
+!
+!TEXT=UTF8Encode()
+UTF8Encode(String)
+!
 !TEXT=UserInput
 //DEPRECATED: Replaced by Input()
 UserInput(Variable, [Prompt=""], [DefaultValue=""]);
