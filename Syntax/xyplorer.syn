@@ -79,6 +79,7 @@ Assert
 BackupTo
 Box
 BR
+Comment
 CopyText
 CopyTextA
 CopyTo
@@ -111,6 +112,7 @@ ReadURL
 RegExReplace
 Rename
 Replace
+Rotate
 Run
 Sel
 Self
@@ -130,6 +132,7 @@ StrPos
 Sub
 SubStr
 SwapNames
+Tag
 Text
 TimeStamp
 Try
@@ -1676,6 +1679,7 @@ Write
 
 ;FUNCTIONS
 [Keywords 4]
+Asc
 Chr
 Compare
 Confirm

@@ -98,6 +98,9 @@ Variable = [Value=""], [Resolve?:|r/""=No];
 //DEPRECATED: Replaced by String1 . String2
 AddStr(Variable, [String1=""/Blank], ..., [String10=""/Blank]);
 !
+!TEXT=Asc()
+Asc(Char)
+!
 !TEXT=Assert
 Assert(Condition, [Message], [Continue?:0|1]);
 !
@@ -112,6 +115,9 @@ BR(NewLine);
 !
 !TEXT=Chr()
 Chr(charCode)
+!
+!TEXT=Comment
+Comment([Comment=""/Remove], [Item=""/Current Selection]);
 !
 !TEXT=Compare()
 Compare(A, B, [Method:b|i|n|v])
@@ -246,6 +252,9 @@ Replace(Variable, String, Query, [Replacement], [MatchCase?:0|1]);
 !TEXT=Report()
 Report([Template=""/List Layout], [OnlySelected:0|1], [Header=""], [Footer=""])
 !
+!TEXT=Rotate
+Rotate([Mode:90|180|270|h|v], [Source:""=Focused], [Target:""=Source], [LosslessOnly?:0|1]);
+!
 !TEXT=Run
 Run(Command, [CWD=""/<curpath>], [Wait?:0|1]);
 !
@@ -263,7 +272,7 @@ SelFilter([Pattern=""/All], [Type:|f|d=""/Both], [Column="Name"]);
 SelPos([Type:|[|+|-][#]|"[pattern]"|a|i|f=""/Deselect All], [Count=1]);
 !
 !TEXT=SelTab
-SelTab([Position:|[#]|+|-=""/Default]);
+SelTab([Position:|[#]|+|-=""/Default], [MRU?:0|1]);
 !
 !TEXT=Sep
 //DEPRECATED: No longer needed.
@@ -312,6 +321,9 @@ SubStr(Variable, String, [Start="0"], [Length="[End]"]);
 !
 !TEXT=SwapNames
 SwapNames();
+!
+!TEXT=Tag
+Tag([TagID=0], [Item=""/Current Selection]);
 !
 !TEXT=Text
 Text(Text, [Width=500], [Height=300], [Caption=""], [Wrap?:|w=""/No Wrapping], [LineBreak="<br>"]);
