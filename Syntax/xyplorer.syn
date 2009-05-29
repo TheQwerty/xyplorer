@@ -22,7 +22,7 @@ KeyWordLength = 0
 BracketChars = {[()]}
 
 ;Characters that are used for operators.
-OperatorChars =<.=!>+-*/
+OperatorChars =<.=!>+-*/&|
 
 ;Character that starts pre-processor statements.
 PreprocStart =
@@ -69,81 +69,63 @@ CharEsc =
 
 ;-------------------------------------------
 ;	KEYWORDS
+;
+;	1) Keywords
+;	2) XY Vars
+;	3) Command IDs
+;	4) Commands
+;	5) Functions
+;	6) --For future or user use--
 ;-------------------------------------------
 
-
-;COMMANDS
+;RESERVED
 [Keywords 1]
-AddStr
-Assert
-BackupTo
-Box
-BR
-Comment
-CopyText
-CopyTextA
-CopyTo
-Delete
-Download
-Echo
-End
-Filter
-Focus
-GetKey
-Global
-Goto
-Highlight
-Incr
-;Input
-InputFile
-InputFolder
-InternetFlags
-Load
-LoadScriptFile
-LoadSearch
-LoadTree
-MoveTo
-Msg
-New
-Open
-OpenWith
-Push
-ReadURL
-RegExReplace
-Rename
-Replace
-Rotate
-Run
-Sel
-Self
-SelFilter
-SelPos
-SelTab
-Sep
-Set
-SetKey
-Setting
-SettingP
-SortBy
-Status
-Step
-StrLen
-StrPos
-Sub
-SubStr
-SwapNames
-Tag
-Text
-TimeStamp
-Try
-Unset
-UnStep
-UserInput
-Write
+and
+false
+if
+or
+true
+while
+xor
+
+;VARIABLES
+;These will only show if they are not contained in a string.
+[Keywords 2]
+clipboard
+curbase
+curext
+curfolder
+curitem
+curitempath
+curname
+curpath
+curpath_s
+curtitle
+curver
+date yyyymmddhhnnss
+datea yyyymmddhhnnss
+datec yyyymmddhhnnss
+datem yyyymmddhhnnss
+focitem
+srcbase
+srcdatea yyyymmddhhnnss
+srcdatec yyyymmddhhnnss
+srcdatem yyyymmddhhnnss
+srcext
+srcitem
+srcname
+srcver
+xydata
+xyexe
+xyini
+xypane
+xypath
+xyver
+
 
 ;COMMAND IDs.
 ;This is #1 - #1500, a lot of these aren't used, but I wanted to avoid frequent updates.
-[Keywords 2]
+[Keywords 3]
 #1
 #2
 #3
@@ -1645,45 +1627,86 @@ Write
 #1499
 #1500
 
-;VARIABLES
-;These will only show if they are not contained in a string.
-[Keywords 3]
-<clipboard>
-<curbase>
-<curext>
-<curfolder>
-<curitem>
-<curname>
-<curpath>
-<curpath_s>
-<curtitle>
-<curver>
-<date yyyymmddhhnnss>
-<datea yyyymmddhhnnss>
-<datec yyyymmddhhnnss>
-<datem yyyymmddhhnnss>
-<focitem>
-<srcbase>
-<srcdatea yyyymmddhhnnss>
-<srcdatec yyyymmddhhnnss>
-<srcdatem yyyymmddhhnnss>
-<srcext>
-<srcitem>
-<srcname>
-<srcver>
-<xydata>
-<xyexe>
-<xyini>
-<xypath>
-<xyver>
+;COMMANDS
+[Keywords 4]
+AddStr
+Assert
+BackupTo
+Box
+BR
+Break
+Comment
+Continue
+CopyItem
+CopyText
+CopyTextA
+CopyTo
+Delete
+Download
+Echo
+End
+Filter
+Focus
+GetKey
+Global
+Goto
+Highlight
+Incr
+;Input
+InputFile
+InputFolder
+InternetFlags
+Load
+LoadScriptFile
+LoadSearch
+LoadTree
+MoveTo
+Msg
+New
+Open
+OpenWith
+Push
+ReadURL
+RegExReplace
+Rename
+Replace
+Rotate
+Run
+Sel
+Self
+SelFilter
+SelPos
+SelTab
+Sep
+Set
+SetKey
+Setting
+SettingP
+SortBy
+Status
+Step
+StrLen
+StrPos
+Sub
+SubStr
+SwapNames
+Tag
+Text
+TimeStamp
+Try
+Unset
+UnStep
+UserInput
+Write
 
 ;FUNCTIONS
-[Keywords 4]
+[Keywords 5]
 Asc
 Chr
 Compare
 Confirm
 Eval
+Exists
 GetInfo
 GetToken
 HTML
@@ -1698,3 +1721,6 @@ URLEncode
 UTF8Decode
 UTF8Encode
 WriteFile
+
+;FOR FUTURE USE - (Can be used by user for additional keywords for now.)
+[Keywords 6]

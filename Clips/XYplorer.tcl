@@ -18,6 +18,9 @@
 !TEXT=<curitem>
 <curitem>
 !
+!TEXT=<curitempath>
+<curitempath>
+!
 !TEXT=<curname>
 <curname>
 !
@@ -82,6 +85,9 @@
 !TEXT=<xyini>
 <xyini>
 !
+!TEXT=<xypane>
+<xypane>
+!
 !TEXT=<xypath>
 <xypath>
 !
@@ -113,6 +119,9 @@ Box([Color=""/Off], [Folder=""/Current]);
 !TEXT=BR
 BR(NewLine);
 !
+!TEXT=Break
+Break([Levels:=1]);
+!
 !TEXT=Chr()
 Chr(charCode)
 !
@@ -124,6 +133,12 @@ Compare(A, B, [Method:b|i|n|v])
 !
 !TEXT=Confirm()
 Confirm(Message, [LineBreak="<br>"])
+!
+!TEXT=Continue
+Continue([Levels:=1]);
+!
+!TEXT=CopyItem
+CopyItem([Item=<curitem>], [Copy="Use Suffix"]);
 !
 !TEXT=CopyText
 CopyText(Text, [Append?:|a=""/Copy], [LineBreak="<br>"]);
@@ -149,6 +164,9 @@ End(Expression, [Message], [Scope:0/"All"|1/"This"]);
 !
 !TEXT=Eval()
 Eval(Expression)
+!
+!TEXT=Exists()
+Exists(Item)
 !
 !TEXT=Filter
 Filter([Pattern="|"/Off]);
