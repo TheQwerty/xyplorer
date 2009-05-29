@@ -81,6 +81,8 @@ CharEsc =
 ;RESERVED
 [Keywords 1]
 and
+else
+elseif
 false
 if
 or
