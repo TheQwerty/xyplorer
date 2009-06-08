@@ -172,7 +172,7 @@ Exists(Item)
 Filter([Pattern="|"/Off]);
 !
 !TEXT=Focus
-Focus([Control:List|Tree|Address Bar|Catalog]);
+Focus([Control:L|A|T|C|P1|P2|PI]);
 !
 !TEXT=GetInfo()
 GetInfo(Info, [Params])
