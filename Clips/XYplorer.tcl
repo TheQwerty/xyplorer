@@ -276,6 +276,9 @@ Rotate([Mode:90|180|270|h|v], [Source:""=Focused], [Target:""=Source], [Lossless
 !TEXT=Run
 Run(Command, [CWD=""/<curpath>], [Wait?:0|1]);
 !
+!TEXT=SaveSettings
+SaveSettings();
+!
 !TEXT=Sel
 Sel([Type:|[|+|-][#]|"[pattern]"|a|i|f=""/Deselect All], [Count=1]);
 !
