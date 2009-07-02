@@ -1,0 +1,184 @@
+/******************************************************************************
+	TortoiseSVN.xys
+
+	This script file provides a handful of scripts to execute common tasks on
+	SVN repositories.
+
+	It relies on TortoiseProc.exe being available on %path%, but could be
+	easily adapted to work with other SVN interfaces.
+******************************************************************************/
+
+/**************************************
+	REPOSITORY SELECTION MENU
+
+This is the initially displayed menu
+where the user selects on which path
+the SVN commands should be executed,
+or executes a common task which does
+not require a SVN repository.
+**************************************/
+
+//Use Parent Directory as Repository path.
+"Use &Parent Directory"
+	Global($repo);
+	RegExReplace($repo, "<curpath>\", "(^.*\\)[^\\]+\\$", "$1");
+	Sub("_loadActions");
+
+//Use Current Path as Repository path.
+"Use &Current Path [<curpath>]"
+	Global($repo);
+	$repo = "<curpath>";
+	Sub("_loadActions");
+
+//Use Focused Item as Repository path.
+"Use &Focused Item [<focitem>]"
+	Global($repo);
+	$repo = "<focitem>";
+	Sub("_loadActions");
+
+//Use Selected Items
+"Use &Selected Item(s)"
+	Global($repo);
+	$repo = GetInfo("SelectedItemsPathNames", "*");
+	Sub("_loadActions");
+
+//Load the menu containing Repository Actions.
+"_loadActions"
+	Global($repo);
+	Status("Repo: $repo",,"progress");
+	Load("*", "_compare;-;_log;_mods;-;_revert;_switch;_update;_commit;-;_genSC;-;_edit;_select", "f");
+
+//------------------------------------------------------------------
+"-"
+
+//Compare all selected items to Base version.
+"Compare Selected to &Base(s)"
+	Status("Comparing selected to base(s)...",,"ready");
+	Global($arg, $ow); $ow = "m"; $arg = "/command:diff /path:""<items>"""; Sub("_doCmd");
+
+//------------------------------------------------------------------
+"-"
+
+//Open Settings dialog.
+"SVN Client S&ettings"
+	Status("Opening settings dialog...",,"ready");
+	Global($arg); $arg = "/command:settings"; Sub("_doCmd");
+
+//Open About dialog.
+"SVN Client &About"
+	Status("Opening about dialog...",,"ready");
+	Global($arg); $arg = "/command:about"; Sub("_doCmd");
+
+//Open Help file.
+"SVN Client &Help"
+	Status("Opening help file(s)...",,"ready");
+	Global($arg); $arg = "/command:help"; Sub("_doCmd");
+
+/**************************************
+	REPOSITORY ACTIONS MENU
+
+This menu is called by a Load command.
+It displays actions which are executed
+on or require a SVN repository.
+**************************************/
+
+//------------------------------------------------------------------
+"- : _"
+"- : _"
+
+//Ensures the following commands are called after $repo is set.
+"Ensure $repo is Set : _ensureRepo"
+	Global($repo);
+	End($repo Like "", 'The global variable $repo must be set before calling this script.');
+
+//Call SVN with the passed arguments.
+//Defining it in a single script makes it easier to modify the path/executable.
+"Run SVN with Passed Arguments : _doCmd"
+	Global($arg, $ow);
+	$exePath = "%programfiles%\TortoiseSVN\bin\TortoiseProc.exe";
+	if ($ow LikeI "m" || $ow LikeI "s") {
+		OpenWith("""$exePath"" $arg", "$ow");
+	} else {
+		Run("""$exePath"" $arg");
+	}
+
+//------------------------------------------------------------------
+"- : _"
+
+//Compares Repo's current state to the HEAD.
+"&Compare To HEAD : _compare"
+	Global($repo); Sub("_ensureRepo");
+	Status("Comparing repo to HEAD...",,"ready");
+	Global($arg); $arg = "/command:diff /path:""$repo"""; Sub("_doCmd");
+
+//------------------------------------------------------------------
+"- : _"
+
+//Show Repo's change log.
+"Show &Log : _log"
+	Global($repo); Sub("_ensureRepo");
+	Status("Displaying repo's change log...",,"ready");
+	Global($arg); $arg = "/command:log /path:""$repo"""; Sub("_doCmd");
+
+//Check Repo for changes.
+"Check for &Modifications : _mods"
+	Global($repo); Sub("_ensureRepo");
+	Status("Checking repo for changes...",,"ready");
+	Global($arg); $arg = "/command:repostatus /path:""$repo"""; Sub("_doCmd");
+
+//------------------------------------------------------------------
+"- : _"
+
+//Revert to HEAD
+"&Revert : _revert"
+	Global($repo); Sub("_ensureRepo");
+	Status("Reverting back to repo's HEAD...",,"ready");
+	Global($arg); $arg = "/command:revert /path:""$repo"""; Sub("_doCmd");
+
+//Change to a different revision in Repo.
+"&Switch To... : _switch"
+	Global($repo); Sub("_ensureRepo");
+	Status("Switching to repo revision...",,"ready");
+	Global($arg); $arg = "/command:switch /path:""$repo"""; Sub("_doCmd");
+
+//Update to a specific revision in Repo.
+"&Update To... : _update"
+	Global($repo); Sub("_ensureRepo");
+	Status("Updating to repo revision...",,"ready");
+	Global($arg); $arg = "/command:update /path:""$repo"""; Sub("_doCmd");
+
+//Commit changes to Repo.
+"C&ommit... : _commit"
+	Global($repo); Sub("_ensureRepo");
+	Status("Committing changes to repo...",,"ready");
+	Global($arg); $arg = "/command:commit /path:""$repo"""; Sub("_doCmd");
+
+//------------------------------------------------------------------
+"- : _"
+
+//Generates a shortcut to this Repo's Actions Menu.
+//This allows the user to create a shortcut to the Repo. Actions Menu for a given repository.
+"&Generate Shortcut for this Repo : _genSC"
+	Global($repo);
+	Self($script, "File");
+	Status("Generating script for repo...",,"ready");
+	Text('"Load SVN Actions for '. $repo . '"<br>  Global($repo);<br>  $repo=' . Quote($repo) . ';<br>  Load(' . Quote($script) . ', "_loadActions", "f");');
+
+//------------------------------------------------------------------
+"- : _"
+
+//Manually Edit the Repo path.
+"&Edit Repo Path : _edit"
+	Global($repo);
+	Status("Editing repo path...",, "ready");
+	$repo = $repo Like "" ? "<curpath>" : $repo;
+	$repo = Input("SVN Repository Path", "Enter the location of a SVN repository:", $repo, "s");
+	Sub("_loadActions");
+
+//Manually Select the Repo path.
+"Selec&t Repo Path : _select"
+	Global($repo);
+	Status("Selecting repo path...",, "ready");
+	$repo = $repo Like "" ? "<curpath>" : $repo;
+	InputFolder($repo, $repo, "Select the location of a SVN repository:");
+	Sub("_loadActions");
