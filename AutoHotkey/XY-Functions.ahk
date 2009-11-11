@@ -1,58 +1,80 @@
+;----------------------------------------
+;AddressBarHasFocus()
+;	This function checks to see if the focused control is the address bar.
+;----------------------------------------
+AddressBarHasFocus() {
+	ControlGetFocus focus, A
+	return (focus == "Edit2")
+}
+
+;----------------------------------------
 ;isListControl(focus)
-;This function checks to see if the focused control is one that has an MRU/Auto-Complete list.
+;	This function checks to see if the focused control is one that has an MRU/Auto-Complete list.
+;----------------------------------------
 isListControl(focus) {
 	validControls =
 (Join| LTrim Comments
-	Edit2	;Rename Dialogs; Paste Here to New Subfolder(s); Selection Filter; Go To; Go To From Here...;
-	Edit4	;Find File->Name;
-	Edit5	;Find File->Location;
-	Edit6	;Address Bar
-	ThunderRT6ComboBox1	;CKS Catagory Selection
+	Edit1	;Go to...; Go to from here....
+	Edit2	;Address Bar
+	Edit4	;Find Files->Location
+
 )
 	validControls = |%validControls%|
 	focus = |%focus%|
 	return InStr(validControls, focus)
 }
 
-;isListDisplay(focus, boxTransColor, searchAreaSize)
-;This function checks to see if a MRU/Auto-Complete list is displayed above or below the control "focus".
-;boxTransColor is used to define what color within the box corner images should be treated as transparent.
-;This allows for handling the cases where the nearest item in the list is selected.
-;searchAreaSize defines the size of the square area around the corner of the control to search for the list.
-isListDisplayed(focus, boxTransColor, searchAreaSize) {
-	;Get the area of the focused control.
-	ControlGetPos CX1, CY1, CW, CH, %focus%
 
+;----------------------------------------
+;isListDisplayed(boxTransColor, searchAreaSize)
+;	This function checks to see if a MRU/Auto-Complete list is displayed above or below the focused control.
+;	boxTransColor is used to define what color within the box corner images should be treated as transparent.
+;		This allows for handling the cases where the nearest item in the list is selected.
+;	searchAreaSize defines the size of the square area around the corner of the control to search for the list.
+;----------------------------------------
+isListDisplayed(boxTransColor, searchAreaSize) {
 	listDisplayed := false
 
-	;X coordinates for both searches.
-	SX1 := CX1 - searchAreaSize
-	SX2 := CX1 + searchAreaSize
+	ControlGetFocus focus, A
+	if (isListControl(focus)) {
+		;Get the area of the focused control.
+		ControlGetPos CX1, CY1, CW, CH, %focus%
+
+		;X coordinates for both searches.
+		SX1 := CX1 - searchAreaSize
+		SX2 := CX1 + searchAreaSize
 
 
-	;Y coordinates for searching below.
-	SY1 := CY1 + CH - searchAreaSize
-	SY2 := CY1 + CH + searchAreaSize
-	ImageSearch, X, Y, SX1, SY1, SX2, SY2, *Trans%boxTransColor% ListBox-Below.bmp
-	if (! ErrorLevel) {
-		;The list box was found underneath the control.
-		listDisplayed := true
-	} else {
-		;Y coordinates for searching above.
-		SY1 := CY1 - searchAreaSize
-		SY2 := CY1 + searchAreaSize
-		ImageSearch, X, Y, SX1, SY1, SX2, SY2, *Trans%boxTransColor% ListBox-Above.bmp
+		;Y coordinates for searching below.
+		SY1 := CY1 + CH - searchAreaSize
+		SY2 := CY1 + CH + searchAreaSize
+		ImageSearch, X, Y, SX1, SY1, SX2, SY2, *Trans%boxTransColor% ListBox-Below.bmp
 		if (! ErrorLevel) {
-			;The list box was found above the control
+			;The list box was found underneath the control.
 			listDisplayed := true
+		} else {
+			;Y coordinates for searching above.
+			SY1 := CY1 - searchAreaSize
+			SY2 := CY1 + searchAreaSize
+			ImageSearch, X, Y, SX1, SY1, SX2, SY2, *Trans%boxTransColor% ListBox-Above.bmp
+			if (! ErrorLevel) {
+				;The list box was found above the control
+				listDisplayed := true
+			}
 		}
 	}
 	return %listDisplayed%
 }
 
-;DoWheelFunction(action)
-;Block sending the action if the focused control has a list box that is not visible.
-DoWheelFunction(action) {
+
+;----------------------------------------
+;TabOnList(mode)
+;	This function detects if we're in a control with an auto-complete/MRU list and if the list is visible
+;	it sends an Up (mode = 0) or Down (mode = 1) keypress.
+;----------------------------------------
+TabOnList(mode) {
+	result := false
+
 	;This is the color of the inside of the list box.
 	;This accounts for cases when the item on the search edge is highlighted.
 	boxTransColor := 0xFFFFFF
@@ -62,25 +84,49 @@ DoWheelFunction(action) {
 	;is placed inside a box with sides of this value.
 	searchAreaSize := 10
 
-
-	ControlGetFocus focus
-	if (isListControl(focus)) {
-		if (! isListDisplayed(focus, boxTransColor, searchAreaSize)) {
-			;List is not displayed.
-			return
+	if (isListDisplayed(boxTransColor, searchAreaSize)) {
+		;Hack to fix issues with focus arguments.
+		;
+		;The System list control automatically highlights the item under the mouse cursor
+		;and gives preference to that over our sent commands, breaking the up and down if
+		;the mouse is over the list.
+		;
+		;This hack moves the mouse in the case that it's over the list and the hotkey is pressed.
+		MouseGetPos ,,MY,,MControl
+		ifInString MControl, SysListView
+		{
+			;The list is a system control so move the mouse cursor.
+			;
+			;The values here are more important than you think at first.
+			;If you move it up or down the selected item may change (which we don't want)
+			;But you can't reliably determine the width of the list box so it can't be easily
+			;moved to the right.
+			;Moving it to (0, MY) keeps it at the same Y value, but moves it to the left edge of the
+			;application.
+			;
+			;This may not be reliable either but it's less likely the list box will extend over this
+			;far, as the control seems to anchor the top-left corner when resizing.
+			MouseMove 0, MY, 0
 		}
-	}
 
-	Send %action%
-	return
+		if (mode) {
+			SendInput {Down}
+		} else {
+			SendInput {Up}
+		}
+		result := true
+	}
+	return %result%
 }
 
-
+;----------------------------------------
 ;DoTabFunctions(mode)
-;Driver to call TabOnList or spoof the original Tab keypress.
+;	Driver to call TabOnList or spoof the original Tab keypress.
+;----------------------------------------
 DoTabFunctions(mode) {
 	if (! TabOnList(mode)) {
-		;The List is not Open, spoof the original Tab key (XY is very picky about how Tab is sent when in Rename Mode).
+		;The List is not Open, spoof the original Tab key.
+		;XY is very picky about how Tab is sent when in Rename Mode.
 		SetKeyDelay -1
 		Send {Blind}{Tab DownTemp}
 		Sleep 5
@@ -89,60 +135,7 @@ DoTabFunctions(mode) {
 }
 
 
-;TabOnList(mode)
-;This function detects if we're in a control with an auto-complete/MRU list and if the list is visible
-;it sends an Up (mode = 0) or Down (mode = 1) keypress.
-TabOnList(mode) {
-	;This is the color of the inside of the list box.
-	;This accounts for cases when the item on the search edge is highlighted.
-	boxTransColor := 0xFFFFFF
-
-	;The length of a side of the search area.
-	;The middle of the control's corner (top-left or bottom-left depending on search)
-	;is placed inside a box with sides of this value.
-	searchAreaSize := 10
-
-	result := false
-
-	ControlGetFocus focus
-	if (isListControl(focus)) {
-		if (isListDisplayed(focus, boxTransColor, searchAreaSize)) {
-			;Hack to fix issues with focus arguments.
-			;
-			;The System list control automatically highlights the item under the mouse cursor
-			;and gives preference to that over our sent commands, breaking the up and down if
-			;the mouse is over the list.
-			;
-			;This hack moves the mouse in the case that it's over the list and the hotkey is pressed.
-			MouseGetPos ,,MY,,MControl
-			ifInString MControl, SysListView
-			{
-				;The list is a system control so move the mouse cursor.
-				;
-				;The values here are more important than you think at first.
-				;If you move it up or down the selected item may change (which we don't want)
-				;But you can't reliably determine the width of the list box so it can't be easily
-				;moved to the right.
-				;Moving it to (0, MY) keeps it at the same Y value, but moves it to the left edge of the
-				;application.
-				;
-				;This may not be reliable either but it's less likely the list box will extend over this
-				;far, as the control seems to anchor the top-left corner when resizing.
-				MouseMove 0, MY, 0
-			}
-
-			if (mode) {
-				SendInput {Down}
-			} else {
-				SendInput {Up}
-			}
-			result := true
-		}
-	}
-	return %result%
-}
-
-;***************************************************************************************
+;----------------------------------------
 ;	This function attempts to display or run an application.
 ;
 ;	It makes use of code written by Sean and posted to the
@@ -203,7 +196,7 @@ TabOnList(mode) {
 ;
 ;		If the window cannot be displayed by just clicking the system tray icon (if it
 ;		involves a click and menu selection), this funciton will not function properly.
-;***************************************************************************************
+;----------------------------------------
 RunOrActivate(EXE_PATH, EXE_PARAMETERS, MainWindowClass, event) {
 	result := 0
 
@@ -280,10 +273,10 @@ RunOrActivate(EXE_PATH, EXE_PARAMETERS, MainWindowClass, event) {
 					;Read program specific info about the button from memory.
 					DllCall("ReadProcessMemory", "Uint", hProc, "Uint", dwData, "Uint", &nfo, "Uint", 24, "Uint", 0)
 
-					hWnd	:= NumGet(nfo, 0)
-					uID		:= NumGet(nfo, 4)
-					nMsg	:= NumGet(nfo, 8)
-					hIcon	:= NumGet(nfo,20)
+					hWnd	:= NumGet(nfo,  0)
+					uID		:= NumGet(nfo,  4)
+					nMsg	:= NumGet(nfo,  8)
+					hIcon	:= NumGet(nfo, 20)
 
 					;Get window information.
 					WinGet pid, PID, ahk_id %hWnd%
@@ -301,13 +294,11 @@ RunOrActivate(EXE_PATH, EXE_PARAMETERS, MainWindowClass, event) {
 				result := 1
 			}
 
+			;Clean up and close the handle.
+			DllCall("VirtualFreeEx", "Uint", hProc, "Uint", pRB, "Uint", 0, "Uint", 0x8000)
+			DllCall("CloseHandle", "Uint", hProc)
+
 			if (found) {
-				;Clean up and close the handle.
-				DllCall("VirtualFreeEx", "Uint", hProc, "Uint", pRB, "Uint", 0, "Uint", 0x8000)
-				DllCall("CloseHandle", "Uint", hProc)
-
-				;MsgBox % "idn: " . idn . " | Pid: " . pid . " | uID: " . uID . " | MessageID: " . nMsg . " | hWnd: " . hWnd . " | Class: " . sClass . " | Process: " . sProcess . "`n"
-
 				;************************************************************
 				;	End of Sean's code.
 				;************************************************************
